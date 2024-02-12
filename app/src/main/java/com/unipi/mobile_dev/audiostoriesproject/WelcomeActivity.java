@@ -49,9 +49,15 @@ public class WelcomeActivity extends AppCompatActivity {
                             }
                         }
                     });
+            Intent intent = new Intent(this, MediaPlayerActivity.class);
+            startActivity(intent);
         }else {
             showMessage("Error","Please provide the information!");
         }
+    }
+    public void visitor(View view) {
+        Intent intent = new Intent(this, MediaPlayerActivity.class);
+        startActivity(intent);
     }
 
     public void goSignUp(View view) {
