@@ -57,7 +57,7 @@ public class WelcomeActivity extends AppCompatActivity {
         }
     }
     public void visitor(View view) {
-        Intent intent = new Intent(this, MediaPlayerActivity.class);
+        Intent intent = new Intent(this, LibraryActivity.class);
         startActivity(intent);
     }
 

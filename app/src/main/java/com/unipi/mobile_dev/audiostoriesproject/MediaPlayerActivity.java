@@ -5,12 +5,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -32,8 +34,11 @@ public class MediaPlayerActivity extends AppCompatActivity {
     EditText fairyTail;
     StorageReference storageReference;
     FirebaseDatabase database;
-    DatabaseReference reference1, reference2;
+    DatabaseReference reference;
     MyTts mytts;
+    String icon,type;
+    String imageViewName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,25 +51,40 @@ public class MediaPlayerActivity extends AppCompatActivity {
         fairyTail = findViewById(R.id.editTextText);
         storageReference = FirebaseStorage.getInstance().getReference();
         database = FirebaseDatabase.getInstance();
-        reference1 = database.getReference("Story1");
-        reference2 = database.getReference("Story2");
+       // reference1 = database.getReference("Story2");
+       // reference2 = database.getReference("Story2");
+       // reference3 = database.getReference("Story3");
+      // reference4 = database.getReference("Story4");
+        imageViewName = getIntent().getStringExtra("ImageViewName");
         mytts = new MyTts(this);
+        switch(imageViewName){
+             case "imageViewSnowWhite":
+                reference = database.getReference("Story1");
+                icon = "toirtoise_and_rabbit.jpg";
+                type = "jpg";
+                 break;
+             case "imageViewMidas":
+                reference = database.getReference("Story2");
+                icon = "kingmidas.png";
+                type = "png";
+                break;
+        }
+
     }
 
     public void readStory(View view) {
-        reference2.addListenerForSingleValueEvent(new ValueEventListener() {
+
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 fairyTail.setText(snapshot.child("Description").getValue().toString());
-                String imageFile = snapshot.child("Image").getValue().toString();
                 try{
-                    File file = File.createTempFile("temp","png");
-                    StorageReference imageRef = storageReference.child("poshrat.png");
+                    File file = File.createTempFile("temp",type);
+                    StorageReference imageRef = storageReference.child(icon);
                     imageRef.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                             storyImage.setImageBitmap(BitmapFactory.decodeFile(file.getAbsolutePath()));
-
                         }
                     });
                 }catch (IOException e){
@@ -75,9 +95,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
                 author.setText(Objects.requireNonNull(snapshot.child("Author").getValue()).toString());
                 year.setText(Objects.requireNonNull(snapshot.child("Year").getValue()).toString());
                 mytts.speak(Objects.requireNonNull(snapshot.child("Description").getValue()).toString());
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 showMessage("Error", "Failed to read story");

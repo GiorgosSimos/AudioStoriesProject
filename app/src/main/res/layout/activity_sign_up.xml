@@ -50,7 +50,7 @@
         app:srcCompat="@drawable/logo_app_thin" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textViewJack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome to Unipi Audio Stories!"
