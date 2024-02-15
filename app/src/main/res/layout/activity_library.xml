@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/imageViewSnowWhite"
-        android:layout_width="124dp"
-        android:layout_height="128dp"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
         android:clickable="true"
         android:onClick="navigateMediaPlayer"
         android:scaleType="fitXY"
@@ -19,8 +19,9 @@
         app:layout_constraintHorizontal_bias="0.024"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.152"
-        app:srcCompat="@drawable/snow_white" />
+        app:layout_constraintVertical_bias="0.15"
+        app:srcCompat="@drawable/snow_white_rose_red" />
+
 
     <TextView
         android:id="@+id/textViewSnowWhite"
@@ -30,11 +31,10 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.905"
+        app:layout_constraintHorizontal_bias="0.727"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.204" />
-
+        app:layout_constraintVertical_bias="0.176" />
 
     <TextView
         android:id="@+id/textViewJack"
@@ -44,10 +44,9 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.682"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.43" />
+        app:layout_constraintVertical_bias="0.338" />
 
     <ImageView
         android:id="@+id/imageView9"
@@ -77,15 +76,89 @@
 
     <ImageView
         android:id="@+id/imageViewMidas"
-        android:layout_width="124dp"
-        android:layout_height="128dp"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
         android:onClick="navigateMediaPlayer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.024"
+        app:layout_constraintHorizontal_bias="0.025"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.419"
-        app:srcCompat="@drawable/toirtoise_and_rabbit" />
+        app:layout_constraintVertical_bias="0.328"
+        app:srcCompat="@drawable/kingmidas" />
+
+    <ImageView
+        android:id="@+id/imageViewShoemaker"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
+        android:onClick="navigateMediaPlayer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.518"
+        app:srcCompat="@drawable/elves_shoemaker" />
+
+    <ImageView
+        android:id="@+id/imageViewTortoise"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
+        android:onClick="navigateMediaPlayer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.713"
+        app:srcCompat="@drawable/tortoise_and_rabbit" />
+
+    <ImageView
+        android:id="@+id/imageViewRat"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
+        android:onClick="navigateMediaPlayer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.022"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.922"
+        app:srcCompat="@drawable/poshrat" />
+
+    <TextView
+        android:id="@+id/textViewShoemaker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="The ELVES and the SHOEMAKER"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.591"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewTortoise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="The Hare and the Tortoise"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.651" />
+
+    <TextView
+        android:id="@+id/textViewRat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Posh Rat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.348"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.872" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

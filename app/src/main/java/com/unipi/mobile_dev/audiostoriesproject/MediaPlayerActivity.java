@@ -59,13 +59,28 @@ public class MediaPlayerActivity extends AppCompatActivity {
         mytts = new MyTts(this);
         switch(imageViewName){
              case "imageViewSnowWhite":
-                reference = database.getReference("Story1");
-                icon = "toirtoise_and_rabbit.jpg";
+                reference = database.getReference("Story5");
+                icon = "snow_white_rose_red.jpg";
                 type = "jpg";
                  break;
              case "imageViewMidas":
-                reference = database.getReference("Story2");
+                reference = database.getReference("Story3");
                 icon = "kingmidas.png";
+                type = "png";
+                break;
+            case "imageViewShoemaker":
+                reference = database.getReference("Story4");
+                icon = "elves_shoemaker.jpg";
+                type = "jpg";
+                break;
+            case "imageViewTortoise":
+                reference = database.getReference("Story1");
+                icon = "tortoise_and_rabbit.jpg";
+                type = "jpg";
+                break;
+            case "imageViewRat":
+                reference = database.getReference("Story2");
+                icon = "poshrat.png";
                 type = "png";
                 break;
         }
