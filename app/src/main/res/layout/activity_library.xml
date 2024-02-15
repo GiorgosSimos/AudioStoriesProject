@@ -28,10 +28,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/snow_white_and_the_seven_dwarfs"
-        android:textSize="16sp"
+        android:textColor="#673AB7"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.727"
+        app:layout_constraintHorizontal_bias="0.798"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.176" />
@@ -41,12 +42,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/jack_and_the_beanstalk"
-        android:textSize="16sp"
+        android:textColor="#673AB7"
+        android:textColorHighlight="#673AB7"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.338" />
+        app:layout_constraintVertical_bias="0.332" />
 
     <ImageView
         android:id="@+id/imageView9"
@@ -131,32 +135,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="The ELVES and the SHOEMAKER"
+        android:textColor="#009688"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.591"
+        app:layout_constraintHorizontal_bias="0.74"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" />
 
     <TextView
         android:id="@+id/textViewTortoise"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="The Hare and the Tortoise"
+        android:textColor="#2196F3"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintHorizontal_bias="0.549"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.651" />
+        app:layout_constraintVertical_bias="0.68" />
 
     <TextView
         android:id="@+id/textViewRat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Posh Rat"
+        android:textColor="#FF5722"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.348"
+        app:layout_constraintHorizontal_bias="0.377"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.872" />

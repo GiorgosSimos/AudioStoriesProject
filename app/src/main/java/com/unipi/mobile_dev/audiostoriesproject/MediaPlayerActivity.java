@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
     MyTts mytts;
     String icon,type;
     String imageViewName;
+    boolean shows_Of_SnowWhite, shows_Of_Midas,shows_Of_PoshRat,shows_Of_Shoemaker,shows_Of_Tortoise;
 
 
     @Override
@@ -51,12 +53,10 @@ public class MediaPlayerActivity extends AppCompatActivity {
         fairyTail = findViewById(R.id.editTextText);
         storageReference = FirebaseStorage.getInstance().getReference();
         database = FirebaseDatabase.getInstance();
-       // reference1 = database.getReference("Story2");
-       // reference2 = database.getReference("Story2");
-       // reference3 = database.getReference("Story3");
-      // reference4 = database.getReference("Story4");
+
         imageViewName = getIntent().getStringExtra("ImageViewName");
         mytts = new MyTts(this);
+
         switch(imageViewName){
              case "imageViewSnowWhite":
                 reference = database.getReference("Story5");
@@ -90,6 +90,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
     public void readStory(View view) {
 
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 fairyTail.setText(snapshot.child("Description").getValue().toString());
@@ -105,11 +106,14 @@ public class MediaPlayerActivity extends AppCompatActivity {
                 }catch (IOException e){
                     throw new RuntimeException(e);
                 }
-
-                title.setText(Objects.requireNonNull(snapshot.child("Title").getValue()).toString());
-                author.setText(Objects.requireNonNull(snapshot.child("Author").getValue()).toString());
-                year.setText(Objects.requireNonNull(snapshot.child("Year").getValue()).toString());
+                title.setText("Title: "+Objects.requireNonNull(snapshot.child("Title").getValue()).toString());
+                author.setText("Author: "+Objects.requireNonNull(snapshot.child("Author").getValue()).toString());
+                year.setText("Year: "+Objects.requireNonNull(snapshot.child("Year").getValue()).toString());
                 mytts.speak(Objects.requireNonNull(snapshot.child("Description").getValue()).toString());
+
+                int shows = Integer.parseInt(snapshot.child("Shows").getValue().toString());
+                reference.child("Shows").setValue(shows+1);
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
