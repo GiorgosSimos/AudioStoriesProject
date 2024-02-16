@@ -76,7 +76,7 @@
         android:id="@+id/buttonPrevious"
         android:layout_width="114dp"
         android:layout_height="51dp"
-        android:onClick="previousStory"
+        android:onClick="stopAndPlayPrevious"
         android:text="Previous"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -66,7 +66,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
              case "imageViewSnowWhite":
                 reference = database.getReference("Story1");
                 icon = "snow_white_rose_red.jpg";
-                 currentId = 1;
+                currentId = 1;
                 type = "jpg";
                  break;
              case "imageViewMidas":
@@ -186,9 +186,57 @@ public class MediaPlayerActivity extends AppCompatActivity {
                 }
             });
         }
-        readStory();
     }
 
+    public void previousStory(){
+        if (currentId != 1){
+            currentId --;
+            reference = database.getReference("Story"+currentId);
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    icon = snapshot.child("Image").getValue(String.class);
+                    String[] parts = icon.split("\\.");
+                    if (parts.length > 1) {
+                        // The last part of the split string is the file extension
+                        type = parts[parts.length - 1];
+                    } else {
+                        // Handle the case where the file extension cannot be determined
+                        showMessage("Error", "Failed to determine image type");
+                        return;
+                    }
+                    readStory();
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    showMessage("Error", "Failed to retrieve information from Firebase");
+                }
+            });
+        } else {
+            reference = database.getReference("Story5");
+            currentId = 5;
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    icon = snapshot.child("Image").getValue(String.class);
+                    String[] parts = icon.split("\\.");
+                    if (parts.length > 1) {
+                        // The last part of the split string is the file extension
+                        type = parts[parts.length - 1];
+                    } else {
+                        // Handle the case where the file extension cannot be determined
+                        showMessage("Error", "Failed to determine image type");
+                        return;
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    showMessage("Error", "Failed to retrieve information from Firebase");
+                }
+            });
+        }
+        readStory();
+    }
     private void showMessage(String title, String message) {
         new AlertDialog.Builder(this)
                 .setTitle(title)
@@ -196,7 +244,6 @@ public class MediaPlayerActivity extends AppCompatActivity {
                 .setCancelable(true)
                 .show();
     }
-
     public void stop() {
         mytts.stop(); // Stop the text-to-speech engine
         stopButton.setVisibility(View.INVISIBLE); // Hide the button
@@ -205,6 +252,11 @@ public class MediaPlayerActivity extends AppCompatActivity {
     public void stopAndPlayNext(View view){
         mytts.stop(); // Stop the text-to-speech engine
         nextStory();
+    }
+    public void stopAndPlayPrevious(View view){
+        mytts.stop();
+        previousStory();
+
     }
     public void stop(View view){
         stop();
