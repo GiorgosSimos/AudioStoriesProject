@@ -7,9 +7,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,6 +33,7 @@ import java.util.Objects;
 
 public class MediaPlayerActivity extends AppCompatActivity {
     ImageView storyImage;
+    Button playButton,stopButton;
     TextView title, author, year;
     EditText fairyTail;
     StorageReference storageReference;
@@ -39,7 +42,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
     MyTts mytts;
     String icon,type;
     String imageViewName;
-    boolean shows_Of_SnowWhite, shows_Of_Midas,shows_Of_PoshRat,shows_Of_Shoemaker,shows_Of_Tortoise;
+    int currentId;
 
 
     @Override
@@ -50,6 +53,8 @@ public class MediaPlayerActivity extends AppCompatActivity {
         title = findViewById(R.id.textViewTitle);
         author = findViewById(R.id.textViewAuthor);
         year = findViewById(R.id.textViewYear);
+        playButton = findViewById(R.id.buttonPlay);
+        stopButton = findViewById(R.id.buttonStop);
         fairyTail = findViewById(R.id.editTextText);
         storageReference = FirebaseStorage.getInstance().getReference();
         database = FirebaseDatabase.getInstance();
@@ -61,34 +66,42 @@ public class MediaPlayerActivity extends AppCompatActivity {
              case "imageViewSnowWhite":
                 reference = database.getReference("Story5");
                 icon = "snow_white_rose_red.jpg";
+                 currentId = 5;
                 type = "jpg";
                  break;
              case "imageViewMidas":
                 reference = database.getReference("Story3");
                 icon = "kingmidas.png";
+                currentId = 3;
                 type = "png";
                 break;
             case "imageViewShoemaker":
                 reference = database.getReference("Story4");
                 icon = "elves_shoemaker.jpg";
+                currentId = 4;
                 type = "jpg";
                 break;
             case "imageViewTortoise":
                 reference = database.getReference("Story1");
                 icon = "tortoise_and_rabbit.jpg";
+                currentId = 1;
                 type = "jpg";
                 break;
             case "imageViewRat":
                 reference = database.getReference("Story2");
                 icon = "poshrat.png";
+                currentId = 2;
                 type = "png";
                 break;
         }
 
     }
 
-    public void readStory(View view) {
 
+
+    public void readStory(View view) {
+        stopButton.setVisibility(View.VISIBLE);
+        playButton.setVisibility(View.GONE);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -121,6 +134,17 @@ public class MediaPlayerActivity extends AppCompatActivity {
             }
         });
     }
+ /*   @SuppressLint("SetTextI18n")
+    public void previousStory(View view){
+        if (currentId % 5 != 0){
+            currentId++;
+            reference = database.getReference("Story"+currentId);
+        }else{
+            reference = database.getReference("Story1");
+        }
+
+        readStory();
+    }*/
 
     private void showMessage(String title, String message) {
         new AlertDialog.Builder(this)
@@ -128,5 +152,14 @@ public class MediaPlayerActivity extends AppCompatActivity {
                 .setMessage(message)
                 .setCancelable(true)
                 .show();
+    }
+
+    public void previousStory(View view) {
+    }
+
+    public void stop(View view) {
+        mytts.stop(); // Stop the text-to-speech engine
+        stopButton.setVisibility(View.INVISIBLE); // Hide the button
+        playButton.setVisibility(View.VISIBLE);
     }
 }

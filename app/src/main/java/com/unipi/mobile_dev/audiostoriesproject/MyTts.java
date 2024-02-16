@@ -22,4 +22,7 @@ public class MyTts {
     public void speak(String message){
         tts.speak(message,TextToSpeech.QUEUE_ADD,null,null);
     }
+    public void stop(){
+        tts.stop();
+    }
 }

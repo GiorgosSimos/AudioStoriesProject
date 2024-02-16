@@ -58,54 +58,73 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.571" />
 
-    <ImageView
-        android:id="@+id/imageViewPlay"
-        android:layout_width="48dp"
-        android:layout_height="54dp"
+
+    <Button
+        android:id="@+id/buttonPlay"
+        android:layout_width="114dp"
+        android:layout_height="51dp"
         android:onClick="readStory"
+        android:text="@string/read"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.72"
-        app:srcCompat="@drawable/play" />
+        app:layout_constraintVertical_bias="0.81" />
 
-    <ImageView
-        android:id="@+id/imageViewPrevious"
-        android:layout_width="48dp"
-        android:layout_height="54dp"
+    <Button
+        android:id="@+id/buttonPrevious"
+        android:layout_width="114dp"
+        android:layout_height="51dp"
+        android:onClick="previousStory"
+        android:text="Previous"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.162"
+        app:layout_constraintHorizontal_bias="0.109"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.72"
-        app:srcCompat="@drawable/previous" />
+        app:layout_constraintVertical_bias="0.812" />
 
-    <ImageView
-        android:id="@+id/imageViewNext"
-        android:layout_width="48dp"
-        android:layout_height="54dp"
+    <Button
+        android:id="@+id/buttonNext"
+        android:layout_width="114dp"
+        android:layout_height="51dp"
+        android:onClick="nextStory"
+        android:text="Next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.872"
+        app:layout_constraintHorizontal_bias="0.882"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.721"
-        app:srcCompat="@drawable/next" />
-
+        app:layout_constraintVertical_bias="0.811" />
 
     <EditText
         android:id="@+id/editTextText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="309dp"
+        android:layout_height="50dp"
         android:ems="10"
         android:inputType="text"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.918" />
+        app:layout_constraintVertical_bias="0.912" />
+
+    <Button
+        android:id="@+id/buttonStop"
+        android:layout_width="114dp"
+        android:layout_height="51dp"
+        android:onClick="stop"
+        android:text="Stop"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.811" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

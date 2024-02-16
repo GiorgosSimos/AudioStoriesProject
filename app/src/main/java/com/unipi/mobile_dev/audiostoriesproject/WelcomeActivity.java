@@ -44,7 +44,7 @@ public class WelcomeActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
                                 showMessage("Success","User signed in successfully!");
-                                Intent intent = new Intent(WelcomeActivity.this, MediaPlayerActivity.class);
+                                Intent intent = new Intent(WelcomeActivity.this, LibraryActivity.class);
                                 startActivity(intent);
                             }else {
                                 showMessage("Error",task.getException().getLocalizedMessage());
@@ -56,15 +56,18 @@ public class WelcomeActivity extends AppCompatActivity {
             showMessage("Error","Please provide the information!");
         }
     }
+
+    public void goSignUp(View view){
+        Intent intent = new Intent(WelcomeActivity.this, SignUpActivity.class);
+        startActivity(intent);
+    }
+
     public void visitor(View view) {
         Intent intent = new Intent(this, LibraryActivity.class);
         startActivity(intent);
     }
 
-    public void goSignUp(View view) {
-        Intent intent = new Intent(this, SignUpActivity.class);
-        startActivity(intent);
-    }
+
     void showMessage(String title, String message){
         new AlertDialog.Builder(this).setTitle(title).setMessage(message).setCancelable(true).show();
     }
