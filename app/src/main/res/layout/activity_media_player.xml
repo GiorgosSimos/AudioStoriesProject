@@ -89,7 +89,7 @@
         android:id="@+id/buttonNext"
         android:layout_width="114dp"
         android:layout_height="51dp"
-        android:onClick="nextStory"
+        android:onClick="stopAndPlayNext"
         android:text="Next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

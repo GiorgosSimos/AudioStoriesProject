@@ -64,33 +64,33 @@ public class MediaPlayerActivity extends AppCompatActivity {
 
         switch(imageViewName){
              case "imageViewSnowWhite":
-                reference = database.getReference("Story5");
+                reference = database.getReference("Story1");
                 icon = "snow_white_rose_red.jpg";
-                 currentId = 5;
+                 currentId = 1;
                 type = "jpg";
                  break;
              case "imageViewMidas":
-                reference = database.getReference("Story3");
+                reference = database.getReference("Story2");
                 icon = "kingmidas.png";
-                currentId = 3;
+                currentId = 2;
                 type = "png";
                 break;
             case "imageViewShoemaker":
-                reference = database.getReference("Story4");
+                reference = database.getReference("Story3");
                 icon = "elves_shoemaker.jpg";
-                currentId = 4;
+                currentId = 3;
                 type = "jpg";
                 break;
             case "imageViewTortoise":
-                reference = database.getReference("Story1");
+                reference = database.getReference("Story4");
                 icon = "tortoise_and_rabbit.jpg";
-                currentId = 1;
+                currentId = 4;
                 type = "jpg";
                 break;
             case "imageViewRat":
-                reference = database.getReference("Story2");
+                reference = database.getReference("Story5");
                 icon = "poshrat.png";
-                currentId = 2;
+                currentId = 5;
                 type = "png";
                 break;
         }
@@ -99,7 +99,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
 
 
 
-    public void readStory(View view) {
+    public void readStory() {
         stopButton.setVisibility(View.VISIBLE);
         playButton.setVisibility(View.GONE);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -134,17 +134,60 @@ public class MediaPlayerActivity extends AppCompatActivity {
             }
         });
     }
- /*   @SuppressLint("SetTextI18n")
-    public void previousStory(View view){
+    public void readStory(View view) {
+        readStory();
+    }
+
+    public void nextStory(){
         if (currentId % 5 != 0){
             currentId++;
             reference = database.getReference("Story"+currentId);
-        }else{
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    icon = snapshot.child("Image").getValue(String.class);
+                    String[] parts = icon.split("\\.");
+                    if (parts.length > 1) {
+                        // The last part of the split string is the file extension
+                        type = parts[parts.length - 1];
+                    } else {
+                        // Handle the case where the file extension cannot be determined
+                        showMessage("Error", "Failed to determine image type");
+                        return;
+                    }
+                    readStory();
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    showMessage("Error", "Failed to retrieve information from Firebase");
+                }
+            });
+        } else {
             reference = database.getReference("Story1");
+            currentId = 1;
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    icon = snapshot.child("Image").getValue(String.class);
+                    String[] parts = icon.split("\\.");
+                    if (parts.length > 1) {
+                        // The last part of the split string is the file extension
+                        type = parts[parts.length - 1];
+                    } else {
+                        // Handle the case where the file extension cannot be determined
+                        showMessage("Error", "Failed to determine image type");
+                        return;
+                    }
+                    readStory();
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    showMessage("Error", "Failed to retrieve information from Firebase");
+                }
+            });
         }
-
         readStory();
-    }*/
+    }
 
     private void showMessage(String title, String message) {
         new AlertDialog.Builder(this)
@@ -154,12 +197,16 @@ public class MediaPlayerActivity extends AppCompatActivity {
                 .show();
     }
 
-    public void previousStory(View view) {
-    }
-
-    public void stop(View view) {
+    public void stop() {
         mytts.stop(); // Stop the text-to-speech engine
         stopButton.setVisibility(View.INVISIBLE); // Hide the button
         playButton.setVisibility(View.VISIBLE);
+    }
+    public void stopAndPlayNext(View view){
+        mytts.stop(); // Stop the text-to-speech engine
+        nextStory();
+    }
+    public void stop(View view){
+        stop();
     }
 }
