@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:onClick="navigateMediaPlayer"
     tools:context=".LibraryActivity">
 
 
@@ -27,43 +28,45 @@
         android:id="@+id/textViewSnowWhite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="navigateMediaPlayer"
         android:text="@string/snow_white_and_the_seven_dwarfs"
         android:textColor="#673AB7"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.798"
+        app:layout_constraintHorizontal_bias="0.92"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.176" />
+        app:layout_constraintVertical_bias="0.179" />
 
     <TextView
-        android:id="@+id/textViewJack"
+        android:id="@+id/textViewMidas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/jack_and_the_beanstalk"
+        android:onClick="navigateMediaPlayer"
+        android:text="King Midas"
         android:textColor="#673AB7"
         android:textColorHighlight="#673AB7"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.332" />
+        app:layout_constraintVertical_bias="0.33" />
 
     <ImageView
         android:id="@+id/imageView9"
-        android:layout_width="54dp"
-        android:layout_height="52dp"
+        android:layout_width="99dp"
+        android:layout_height="62dp"
         android:clickable="true"
         android:onClick="viewStatistics"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.957"
+        app:layout_constraintHorizontal_bias="0.945"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.014"
+        app:layout_constraintVertical_bias="0.024"
         app:srcCompat="@drawable/statistics" />
 
     <ImageView
@@ -134,12 +137,13 @@
         android:id="@+id/textViewShoemaker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="navigateMediaPlayer"
         android:text="The ELVES and the SHOEMAKER"
         android:textColor="#009688"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.74"
+        app:layout_constraintHorizontal_bias="0.853"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.499" />
@@ -148,12 +152,13 @@
         android:id="@+id/textViewTortoise"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="navigateMediaPlayer"
         android:text="The Hare and the Tortoise"
         android:textColor="#2196F3"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.549"
+        app:layout_constraintHorizontal_bias="0.632"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.68" />
@@ -162,14 +167,15 @@
         android:id="@+id/textViewRat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="navigateMediaPlayer"
         android:text="Posh Rat"
         android:textColor="#FF5722"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.377"
+        app:layout_constraintHorizontal_bias="0.38"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.872" />
+        app:layout_constraintVertical_bias="0.868" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

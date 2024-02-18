@@ -7,9 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class LibraryActivity extends AppCompatActivity {
-    ImageView snowWhite,jackBean;
     int imageViewId;
 
 
@@ -17,16 +17,17 @@ public class LibraryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library);
-        snowWhite = findViewById(R.id.imageViewSnowWhite);
-
 
     }
 
     public void navigateMediaPlayer(View view) {
         ImageView imageView = (ImageView) view;
+      //  TextView textView = (TextView) view ;
+      //  String textViewName = getResources().getResourceEntryName(textView.getId());
         String imageViewName = getResources().getResourceEntryName(imageView.getId());
         Intent intent = new Intent(this,MediaPlayerActivity.class);
         intent.putExtra("ImageViewName",imageViewName);
+       // intent.putExtra("TextViewName",textViewName);
         startActivity(intent);
     }
 

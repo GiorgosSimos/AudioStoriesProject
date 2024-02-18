@@ -4,4 +4,7 @@
     <string name="jack_and_the_beanstalk">Jack and the Beanstalk</string>
     <string name="snow_white_and_the_seven_dwarfs">Snow White and the Seven Dwarfs</string>
     <string name="read">Read</string>
+    <string name="see_all_statistics">See All Statistics</string>
+    <string name="most_popular_story">Most Popular Story</string>
+    <string name="less_polpular_story">Less Polpular Story</string>
 </resources>

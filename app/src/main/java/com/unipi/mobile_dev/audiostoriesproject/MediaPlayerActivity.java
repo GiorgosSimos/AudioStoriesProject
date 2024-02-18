@@ -60,6 +60,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
 
         imageViewName = getIntent().getStringExtra("ImageViewName");
+     //   textViewName = getIntent().getStringExtra("TextViewName");
         mytts = new MyTts(this);
 
         switch(imageViewName){
@@ -94,6 +95,38 @@ public class MediaPlayerActivity extends AppCompatActivity {
                 type = "png";
                 break;
         }
+   /*    switch(textViewName){
+            case "textViewSnowWhite":
+                reference = database.getReference("Story1");
+                icon = "snow_white_rose_red.jpg";
+                currentId = 1;
+                type = "jpg";
+                break;
+            case "textViewMidas":
+                reference = database.getReference("Story2");
+                icon = "kingmidas.png";
+                currentId = 2;
+                type = "png";
+                break;
+            case "textViewShoemaker":
+                reference = database.getReference("Story3");
+                icon = "elves_shoemaker.jpg";
+                currentId = 3;
+                type = "jpg";
+                break;
+            case "textViewTortoise":
+                reference = database.getReference("Story4");
+                icon = "tortoise_and_rabbit.jpg";
+                currentId = 4;
+                type = "jpg";
+                break;
+            case "textViewRat":
+                reference = database.getReference("Story5");
+                icon = "poshrat.png";
+                currentId = 5;
+                type = "png";
+                break;
+        }   */
 
     }
 
