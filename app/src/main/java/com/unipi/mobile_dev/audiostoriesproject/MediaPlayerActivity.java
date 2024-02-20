@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class MediaPlayerActivity extends AppCompatActivity {
+    private DatabaseReference languageRef;
     ImageView storyImage;
     Button playButton,stopButton;
     TextView title, author, year;
@@ -58,6 +59,8 @@ public class MediaPlayerActivity extends AppCompatActivity {
         fairyTail = findViewById(R.id.editTextText);
         storageReference = FirebaseStorage.getInstance().getReference();
         database = FirebaseDatabase.getInstance();
+
+        languageRef = FirebaseDatabase.getInstance().getReference("Language");
 
         imageViewName = getIntent().getStringExtra("ImageViewName");
      //   textViewName = getIntent().getStringExtra("TextViewName");
@@ -294,4 +297,10 @@ public class MediaPlayerActivity extends AppCompatActivity {
     public void stop(View view){
         stop();
     }
+    public void previousActivity(View view){
+        stop();
+        Intent intent = new Intent(this,LibraryActivity.class);
+        startActivity(intent);
+    }
+
 }

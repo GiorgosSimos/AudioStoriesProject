@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:onClick="navigateMediaPlayer"
     tools:context=".LibraryActivity">
 
 
@@ -70,9 +69,10 @@
         app:srcCompat="@drawable/statistics" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/imageViewSettings"
         android:layout_width="54dp"
         android:layout_height="52dp"
+        android:onClick="settings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.019"

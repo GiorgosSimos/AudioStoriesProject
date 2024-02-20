@@ -19,9 +19,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class WelcomeActivity extends AppCompatActivity {
+    private DatabaseReference languageRef;
     EditText email,password;
     FirebaseAuth mAuth;
     FirebaseUser user;
@@ -34,6 +37,8 @@ public class WelcomeActivity extends AppCompatActivity {
         password = findViewById(R.id.editTextPassword);
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
+        languageRef = FirebaseDatabase.getInstance().getReference("Language");
+        languageRef.setValue("");
     }
 
     public void goSignIn(View view) {

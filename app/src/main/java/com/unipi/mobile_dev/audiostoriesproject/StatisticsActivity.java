@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -108,6 +109,10 @@ public class StatisticsActivity extends AppCompatActivity {
 
     public void showAllShows(View view) {
         showAllShows();
+    }
+    public void previousActivity(View view){
+        Intent intent = new Intent(this,LibraryActivity.class);
+        startActivity(intent);
     }
 
     void showMessage(String title, String message){
