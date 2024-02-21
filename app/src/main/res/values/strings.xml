@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">AudioStoriesProject</string>
     <string name="play">play</string>
-    <string name="jack_and_the_beanstalk">Jack and the Beanstalk</string>
     <string name="snow_white_and_the_seven_dwarfs">Snow White and the Seven Dwarfs</string>
     <string name="read">Read</string>
     <string name="see_all_statistics">See All Statistics</string>
-    <string name="most_popular_story">Most Popular Story</string>
-    <string name="less_polpular_story">Less Polpular Story</string>
     <string name="king_midas">King Midas</string>
     <string name="Shoemaker">ShoeMaker</string>
     <string name="the_hare_and_the_tortoise">The hare and the Tortoise</string>
     <string name="posh_rat">Posh Rat</string>
+    <string name="all_statistitcs">All statistitcs</string>
+    <string name="most_favorite">Most favorite</string>
+    <string name="less_favorite">Less favorite</string>
 </resources>

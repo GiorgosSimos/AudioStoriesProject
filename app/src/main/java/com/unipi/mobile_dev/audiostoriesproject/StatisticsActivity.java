@@ -50,7 +50,7 @@ public class StatisticsActivity extends AppCompatActivity {
                         title = storySnapshot.child("Title").getValue(String.class);
                     }
                 }
-                showMessage("Story with the most shows: ",title);
+                showMessage("Story with the most shows: ","Title: "+title+"\nNumber of shows: "+max);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -74,7 +74,7 @@ public class StatisticsActivity extends AppCompatActivity {
                         title =storySnapshot.child("Title").getValue().toString(); //TO DO: save the title of the story
                     }
                 }
-                showMessage("Less popular Story : ",title);
+                showMessage("Story with the less shows: ","Title: "+title+"\nNumber of shows: "+min);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -119,6 +119,7 @@ public class StatisticsActivity extends AppCompatActivity {
 
         startActivityForResult(intent,123);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -132,32 +133,43 @@ public class StatisticsActivity extends AppCompatActivity {
             }
         }
     }
+
     private void processCommand(String command) {
         // Handle the recognized command here
         // For example, you can use a switch statement to perform different actions based on the command
         switch (command.toLowerCase()) {
             case "all statistics":
-                showStatistics();
+                showAllShows();
                 break;
-            case "most popular":
+            case "most favorite":
                 winner();
                 break;
-            case "less popular":
+            case "less favorite":
                 loser();
                 break;
             default:
-                // Handle unrecognized command
+                showMessage("Error","Unrecognized command");
                 break;
         }
     }
 
-    private void openStatisticsActivity() {
-        // Code to open the StatisticsActivity
-    }
 
-    private void showStatistics() {
-        // Code to display the statistics
-    }
+
+
+ /*   @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==123 && resultCode==RESULT_OK){
+            ArrayList<String> recognizedText = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            try {
+                this.getWindow().getDecorView().setBackgroundColor(Color.parseColor(recognizedText.get(0)));
+            }catch (IllegalArgumentException e){
+                showMessage("Error","Please say a valid color");
+            }
+            showMessage("Recognized",recognizedText.toString());
+        }
+    } */
+
 
     void showMessage(String title, String message){
         new AlertDialog.Builder(this).setTitle(title).setMessage(message).setCancelable(true).show();
