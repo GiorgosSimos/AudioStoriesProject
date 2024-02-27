@@ -10,5 +10,5 @@
     <string name="posh_rat">Posh Rat</string>
     <string name="all_statistitcs">All statistitcs</string>
     <string name="most_favorite">Most favorite</string>
-    <string name="less_favorite">Less favorite</string>
+    <string name="less_favorite">Least favorite</string>
 </resources>
