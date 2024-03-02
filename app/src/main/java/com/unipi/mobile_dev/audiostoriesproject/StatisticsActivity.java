@@ -1,18 +1,16 @@
 package com.unipi.mobile_dev.audiostoriesproject;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,6 +20,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class StatisticsActivity extends AppCompatActivity {
+
+    BottomNavigationView bottomNavigationView;
     FirebaseDatabase database;
     DatabaseReference reference;
     TextView textView1,textView2;
@@ -34,6 +34,28 @@ public class StatisticsActivity extends AppCompatActivity {
         reference = database.getReference();
         textView1 = findViewById(R.id.textViewAllStats);
         textView2 = findViewById(R.id.textViewWinner);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.statistics);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.library) {
+                Intent intentLibrary = new Intent(getApplicationContext(), LibraryActivity.class);
+                startActivity(intentLibrary);
+                overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
+                finish();
+                return true;
+            } else if (itemId == R.id.music_player) {
+                Intent intentPlayer = new Intent(getApplicationContext(), MediaPlayerActivity.class);
+                startActivity(intentPlayer);
+                overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
+                finish();
+                return true;
+            } else if (itemId == R.id.statistics) {
+                return true;
+            } else {
+                return false;
+            }
+        });
 
     }
 

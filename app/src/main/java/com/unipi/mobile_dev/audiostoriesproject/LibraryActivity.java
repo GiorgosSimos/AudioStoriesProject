@@ -4,32 +4,25 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
+
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.StorageReference;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Objects;
 
 public class LibraryActivity extends AppCompatActivity {
+
+    BottomNavigationView bottomNavigationView;
     TextView textSnowWhite,textKingMidas,textShoemaker,textTortoise,textRat;
     private DatabaseReference languageRef;
     String selectedLanguage = "";
@@ -44,6 +37,28 @@ public class LibraryActivity extends AppCompatActivity {
         textShoemaker = findViewById(R.id.textViewShoemaker);
         textTortoise = findViewById(R.id.textViewTortoise);
         textRat = findViewById(R.id.textViewRat);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.library);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.library) {
+                return true;
+            } else if (itemId == R.id.music_player) {
+                Intent intentPlayer = new Intent(getApplicationContext(), MediaPlayerActivity.class);
+                startActivity(intentPlayer);
+                overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
+                finish();
+                return true;
+            } else if (itemId == R.id.statistics) {
+                Intent intentStats = new Intent(getApplicationContext(), StatisticsActivity.class);
+                startActivity(intentStats);
+                overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
+                finish();
+                return true;
+            } else {
+                return false;
+            }
+        });
         database = FirebaseDatabase.getInstance();
         languageRef = FirebaseDatabase.getInstance().getReference("Language");
 

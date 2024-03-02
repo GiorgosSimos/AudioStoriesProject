@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
@@ -15,9 +14,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,6 +31,8 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class MediaPlayerActivity extends AppCompatActivity {
+
+    BottomNavigationView bottomNavigationView;
     ImageView storyImage;
     Button playButton,stopButton;
     TextView title, author, year;
@@ -57,6 +58,29 @@ public class MediaPlayerActivity extends AppCompatActivity {
         fairyTail = findViewById(R.id.editTextText);
         storageReference = FirebaseStorage.getInstance().getReference();
         database = FirebaseDatabase.getInstance();
+
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.music_player);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.library) {
+                Intent intentLibrary = new Intent(getApplicationContext(), LibraryActivity.class);
+                startActivity(intentLibrary);
+                overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
+                finish();
+                return true;
+            } else if (itemId == R.id.music_player) {
+                return true;
+            } else if (itemId == R.id.statistics) {
+                Intent intentStats = new Intent(getApplicationContext(), StatisticsActivity.class);
+                startActivity(intentStats);
+                overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
+                finish();
+                return true;
+            } else {
+                return false;
+            }
+        });
 
         imageViewName = getIntent().getStringExtra("ImageViewName");
      //   textViewName = getIntent().getStringExtra("TextViewName");

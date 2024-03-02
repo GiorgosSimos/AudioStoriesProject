@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/imageViewSnowWhite"
-        android:layout_width="95dp"
-        android:layout_height="95dp"
+        android:layout_width="67dp"
+        android:layout_height="64dp"
         android:clickable="true"
         android:onClick="navigateMediaPlayer"
         android:scaleType="fitXY"
@@ -81,54 +81,54 @@
 
     <ImageView
         android:id="@+id/imageViewMidas"
-        android:layout_width="95dp"
-        android:layout_height="95dp"
+        android:layout_width="64dp"
+        android:layout_height="55dp"
         android:onClick="navigateMediaPlayer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintHorizontal_bias="0.031"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.328"
+        app:layout_constraintVertical_bias="0.264"
         app:srcCompat="@drawable/kingmidas" />
 
     <ImageView
         android:id="@+id/imageViewShoemaker"
-        android:layout_width="95dp"
-        android:layout_height="95dp"
+        android:layout_width="73dp"
+        android:layout_height="45dp"
         android:onClick="navigateMediaPlayer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintHorizontal_bias="0.02"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.518"
+        app:layout_constraintVertical_bias="0.372"
         app:srcCompat="@drawable/elves_shoemaker" />
 
     <ImageView
         android:id="@+id/imageViewTortoise"
-        android:layout_width="95dp"
-        android:layout_height="95dp"
+        android:layout_width="73dp"
+        android:layout_height="60dp"
         android:onClick="navigateMediaPlayer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintHorizontal_bias="0.02"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.713"
+        app:layout_constraintVertical_bias="0.499"
         app:srcCompat="@drawable/tortoise_and_rabbit" />
 
     <ImageView
         android:id="@+id/imageViewRat"
-        android:layout_width="95dp"
-        android:layout_height="95dp"
+        android:layout_width="78dp"
+        android:layout_height="48dp"
         android:onClick="navigateMediaPlayer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.022"
+        app:layout_constraintHorizontal_bias="0.024"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.922"
+        app:layout_constraintVertical_bias="0.6"
         app:srcCompat="@drawable/poshrat" />
 
     <TextView
@@ -177,6 +177,25 @@
         app:layout_constraintStart_toEndOf="@id/imageViewRat"
         android:layout_marginStart="15dp"
     />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_background"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:itemRippleColor="@android:color/transparent"
+        app:itemIconSize="32dp"
+        app:itemIconTint="@drawable/item_selector"
+        app:menu="@menu/bottom_nav_menu">
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,9 +15,6 @@
         android:theme="@style/Theme.AudioStoriesProject"
         tools:targetApi="31">
         <activity
-            android:name=".userlist"
-            android:exported="false" />
-        <activity
             android:name=".MyTts"
             android:exported="false" />
         <activity
