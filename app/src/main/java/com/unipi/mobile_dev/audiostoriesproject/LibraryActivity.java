@@ -30,7 +30,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class LibraryActivity extends AppCompatActivity {
-    TextView textSnowWhite,textKingMidas,textShoemaker,textTortoise,textRat;
+    TextView textSnowWhite,textKingMidas,textShoemaker,textTortoise,textRat,cinderella;
     private DatabaseReference languageRef;
     String selectedLanguage = "";
     FirebaseDatabase database;
@@ -43,6 +43,7 @@ public class LibraryActivity extends AppCompatActivity {
         textKingMidas = findViewById(R.id.textViewMidas);
         textShoemaker = findViewById(R.id.textViewShoemaker);
         textTortoise = findViewById(R.id.textViewTortoise);
+        cinderella = findViewById(R.id.textViewCinderella);
         textRat = findViewById(R.id.textViewRat);
         database = FirebaseDatabase.getInstance();
         languageRef = FirebaseDatabase.getInstance().getReference("Language");
@@ -97,6 +98,7 @@ public class LibraryActivity extends AppCompatActivity {
                 String shoemakerTitle = snapshot.child("shoemaker_title").getValue(String.class);
                 String tortoiseTitle = snapshot.child("tortoise_title").getValue(String.class);
                 String ratTitle = snapshot.child("rat_title").getValue(String.class);
+                String cinderellaTitle = snapshot.child("cinderella_title").getValue(String.class);
 
                 // Set the retrieved titles to the corresponding TextViews
                 textSnowWhite.setText(snowTitle);
@@ -104,6 +106,7 @@ public class LibraryActivity extends AppCompatActivity {
                 textShoemaker.setText(shoemakerTitle);
                 textTortoise.setText(tortoiseTitle);
                 textRat.setText(ratTitle);
+                cinderella.setText(cinderellaTitle);
             }
 
             @Override
