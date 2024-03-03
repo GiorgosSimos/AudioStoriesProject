@@ -68,6 +68,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
                 startActivity(intentLibrary);
                 overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
                 finish();
+                stop();
                 return true;
             } else if (itemId == R.id.music_player) {
                 return true;
@@ -76,6 +77,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
                 startActivity(intentStats);
                 overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
                 finish();
+                stop();
                 return true;
             } else {
                 return false;

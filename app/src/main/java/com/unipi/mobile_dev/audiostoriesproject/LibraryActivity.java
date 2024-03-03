@@ -45,6 +45,7 @@ public class LibraryActivity extends AppCompatActivity {
                 return true;
             } else if (itemId == R.id.music_player) {
                 Intent intentPlayer = new Intent(getApplicationContext(), MediaPlayerActivity.class);
+                intentPlayer.putExtra("ImageViewName","imageViewSnowWhite");// Default selection of Story 1
                 startActivity(intentPlayer);
                 overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
                 finish();
