@@ -13,4 +13,18 @@
     <string name="less_favorite">Less favorite</string>
     <string name="cinderella">Cinderella</string>
     <string name="cinderella2">Cinderella</string>
+    <string name="please_enter_your_email">Please enter your email</string>
+    <string name="please_enter_your_password">Please enter your password.</string>
+    <string name="visitor">Visitor</string>
+    <string name="sign_in">Sign In</string>
+    <string name="new_user_click_here">New User? Click here</string>
+    <string name="audio_story_title">Audio Story Title</string>
+    <string name="author">Author</string>
+    <string name="release_year">Release Year</string>
+    <string name="previous">Previous</string>
+    <string name="stop">Stop</string>
+    <string name="go_to_library">Go to Library</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="speak_command">Speak Command</string>
 </resources>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Progetto AudioStorie</string>
+    <string name="play">giocare</string>
+    <string name="snow_white_and_the_seven_dwarfs">Biancaneve e i sette nani</string>
+    <string name="read">Leggere</string>
+    <string name="see_all_statistics">Vedi tutte le statistiche</string>
+    <string name="king_midas">Re Mida</string>
+    <string name="Shoemaker">Calzolaia</string>
+    <string name="the_hare_and_the_tortoise">La lepre e la tartaruga</string>
+    <string name="posh_rat">Ratto elegante</string>
+    <string name="all_statistitcs">Tutte le statistiche</string>
+    <string name="most_favorite">Il più preferito</string>
+    <string name="less_favorite">Meno favorito</string>
+    <string name="cinderella">Cenerentola</string>
+    <string name="cinderella2">Cenerentola</string>
+    <string name="please_enter_your_email">Per favore inserisci la tua email</string>
+    <string name="please_enter_your_password">Per favore inserisci LA TUA password.</string>
+    <string name="visitor">Visitatrice</string>
+    <string name="sign_in">Registrazione</string>
+    <string name="new_user_click_here">Nuovo utente? clicca qui</string>
+    <string name="audio_story_title">Titolo della storia audio</string>
+    <string name="author">Autore</string>
+    <string name="release_year">Anno di pubblicazione</string>
+    <string name="previous">Precedente</string>
+    <string name="stop">Fermare</string>
+    <string name="go_to_library">Vai alla Biblioteca</string>
+    <string name="next">Prossimo</string>
+    <string name="back">Indietro</string>
+    <string name="speak_command">Pronuncia comando</string>
+</resources>
