@@ -85,17 +85,21 @@ public class MediaPlayerActivity extends AppCompatActivity {
         });
 
         imageViewName = getIntent().getStringExtra("ImageViewName");
-     //   textViewName = getIntent().getStringExtra("TextViewName");
+        //   textViewName = getIntent().getStringExtra("TextViewName");
         mytts = new MyTts(this);
 
+        loadStories();
+
+    }
+    private void loadStories() {
         switch(imageViewName){
-             case "imageViewSnowWhite":
+            case "imageViewSnowWhite":
                 reference = database.getReference("Story1");
                 icon = "snow_white_rose_red.jpg";
                 currentId = 1;
                 type = "jpg";
-                 break;
-             case "imageViewMidas":
+                break;
+            case "imageViewMidas":
                 reference = database.getReference("Story2");
                 icon = "kingmidas.png";
                 currentId = 2;
@@ -120,41 +124,32 @@ public class MediaPlayerActivity extends AppCompatActivity {
                 type = "png";
                 break;
         }
-   /*    switch(textViewName){
-            case "textViewSnowWhite":
-                reference = database.getReference("Story1");
-                icon = "snow_white_rose_red.jpg";
-                currentId = 1;
-                type = "jpg";
-                break;
-            case "textViewMidas":
-                reference = database.getReference("Story2");
-                icon = "kingmidas.png";
-                currentId = 2;
-                type = "png";
-                break;
-            case "textViewShoemaker":
-                reference = database.getReference("Story3");
-                icon = "elves_shoemaker.jpg";
-                currentId = 3;
-                type = "jpg";
-                break;
-            case "textViewTortoise":
-                reference = database.getReference("Story4");
-                icon = "tortoise_and_rabbit.jpg";
-                currentId = 4;
-                type = "jpg";
-                break;
-            case "textViewRat":
-                reference = database.getReference("Story5");
-                icon = "poshrat.png";
-                currentId = 5;
-                type = "png";
-                break;
-        }   */
-
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                title.setText("Title: " + Objects.requireNonNull(snapshot.child("Title").getValue()).toString());
+                author.setText("Author: " + Objects.requireNonNull(snapshot.child("Author").getValue()).toString());
+                year.setText("Year: " + Objects.requireNonNull(snapshot.child("Year").getValue()).toString());
+                try {
+                    File file = File.createTempFile("temp", type);
+                    StorageReference imageRef = storageReference.child(icon);
+                    imageRef.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            storyImage.setImageBitmap(BitmapFactory.decodeFile(file.getAbsolutePath()));
+                        }
+                    });
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                showMessage("Error", "Failed to read story details");
+            }
+        });
     }
-
 
 
     public void readStory() {
