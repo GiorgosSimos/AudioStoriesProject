@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient"
+    tools:context=".AboutActivity">
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="goToLibrary"
+        android:text="Return To Library"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.818" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="393dp"
+        android:layout_height="58dp"
+        android:text="Copyright © 2024 Stergios Toulioudas &amp; Georgios Simos"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.973" />
+
+    <EditText
+        android:id="@+id/editTextTextMultiLine"
+        android:layout_width="378dp"
+        android:layout_height="336dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:text="The Android app &quot;Unipi Audio Stories&quot; was developed as part of a university project for the course of software enigineering for mobile devices. It offers a collection of engaging audio stories tailored for children. The app is designed to provide children with a delightful and educational experience through audio storytelling. It offers a curated selection of age-appropriate stories, ranging from classic fairy tales to modern adventures.  Upon launching the app, children are greeted with a colorful and intuitive interface, designed to capture their attention and spark their imagination. The home screen presents a variety of available stories, allowing young listeners to explore tales based on their interests.  Once a picture of a story is selected, the app is redirected to the media player and children are immersed in a captivating audio narrative, accompanied by details of the story. The app's user-friendly controls enable children to play, pause, and navigate between previous and next story. In addition to its diverse library of stories, &quot;Unipi Audio Stories&quot; offers a statistics panel where children can view how many times they've heard each story and which one is their most/least favorite."
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.395" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="385dp"
+        android:layout_height="99dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.028"
+        app:srcCompat="@drawable/logo_app_thin" />
+</androidx.constraintlayout.widget.ConstraintLayout>
