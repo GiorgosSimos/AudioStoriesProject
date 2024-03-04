@@ -50,6 +50,7 @@ public class WelcomeActivity extends AppCompatActivity {
                             if (task.isSuccessful()){
                                 showMessage("Success","User signed in successfully!");
                                 Intent intent = new Intent(WelcomeActivity.this, LibraryActivity.class);
+                                intent.putExtra("UserType", email.getText().toString());
                                 startActivity(intent);
                             }else {
                                 showMessage("Error",task.getException().getLocalizedMessage());
@@ -69,6 +70,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     public void visitor(View view) {
         Intent intent = new Intent(this, LibraryActivity.class);
+        intent.putExtra("UserType", "Visitor");
         startActivity(intent);
     }
 

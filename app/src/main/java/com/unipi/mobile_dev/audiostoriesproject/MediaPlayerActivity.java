@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -59,6 +60,9 @@ public class MediaPlayerActivity extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
         database = FirebaseDatabase.getInstance();
 
+        Intent intent = getIntent();
+        String userType = intent.getStringExtra("UserType");
+
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.music_player);
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -73,12 +77,16 @@ public class MediaPlayerActivity extends AppCompatActivity {
             } else if (itemId == R.id.music_player) {
                 return true;
             } else if (itemId == R.id.statistics) {
-                Intent intentStats = new Intent(getApplicationContext(), StatisticsActivity.class);
-                startActivity(intentStats);
-                overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
-                finish();
-                stop();
+                if (userType != null && !userType.equals("Visitor")) {
+                    Intent intentStats = new Intent(getApplicationContext(), StatisticsActivity.class);
+                    startActivity(intentStats);
+                    overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
+                    finish();
+                } else {
+                    Toast.makeText(MediaPlayerActivity.this, "Available only for logged in users!", Toast.LENGTH_SHORT).show();
+                }
                 return true;
+
             } else {
                 return false;
             }

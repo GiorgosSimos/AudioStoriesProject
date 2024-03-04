@@ -32,7 +32,7 @@ public class LibraryActivity extends AppCompatActivity {
     LinearLayout home, language, about, contact, logout;
 
     BottomNavigationView bottomNavigationView;
-    TextView textSnowWhite,textKingMidas,textShoemaker,textTortoise,textRat;
+    TextView textSnowWhite, textKingMidas, textShoemaker, textTortoise, textRat, userInfo;
     private DatabaseReference languageRef;
     String selectedLanguage = "";
     FirebaseDatabase database;
@@ -44,11 +44,19 @@ public class LibraryActivity extends AppCompatActivity {
         // Link options of hamburger menu
         drawerLayout = findViewById(R.id.drawerLayout);
         burger_menu = findViewById(R.id.burger_menu);
+        userInfo = findViewById(R.id.user_info);
         home = findViewById(R.id.home);
         language = findViewById(R.id.language);
         about = findViewById(R.id.about);
         contact = findViewById(R.id.contact);
         logout = findViewById(R.id.logout);
+        // Retrieve extra information from the Intent
+        Intent intent = getIntent();
+        String userType = intent.getStringExtra("UserType");
+        if (userType != null && userType.equals("Visitor")){
+            logout.setVisibility(View.GONE);
+        }
+        userInfo.setText(userType);
 
         burger_menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +88,7 @@ public class LibraryActivity extends AppCompatActivity {
                 redirectActivity(LibraryActivity.this, ContactActivity.class);
             }
         });
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,11 +116,16 @@ public class LibraryActivity extends AppCompatActivity {
                 finish();
                 return true;
             } else if (itemId == R.id.statistics) {
-                Intent intentStats = new Intent(getApplicationContext(), StatisticsActivity.class);
-                startActivity(intentStats);
-                overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
-                finish();
+                if (userType != null && !userType.equals("Visitor")) {
+                    Intent intentStats = new Intent(getApplicationContext(), StatisticsActivity.class);
+                    startActivity(intentStats);
+                    overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
+                    finish();
+                } else {
+                    Toast.makeText(LibraryActivity.this, "Available only for logged in users!", Toast.LENGTH_SHORT).show();
+                }
                 return true;
+
             } else {
                 return false;
             }
