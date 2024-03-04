@@ -63,7 +63,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
         database = FirebaseDatabase.getInstance();
 
-        String userType = sharedPreferences.getString("UserType", "Visitor");
+        String userType = sharedPreferences.getString("UserType", "default_value");
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.music_player);

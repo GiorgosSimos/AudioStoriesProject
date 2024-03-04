@@ -32,7 +32,6 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         sharedPreferences = getSharedPreferences("com.unipi.mobile_dev.audiostoriesproject", MODE_PRIVATE);
-        sharedPreferences.getString("userType","Visitor");
         email = findViewById(R.id.editTextEmailAddress);
         password = findViewById(R.id.editTextPassword);
         mAuth = FirebaseAuth.getInstance();
@@ -71,6 +70,9 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     public void visitor(View view) {
+        SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
+        prefsEditor.putString("UserType", "Visitor");
+        prefsEditor.apply();
         Intent intent = new Intent(this, LibraryActivity.class);
         startActivity(intent);
     }

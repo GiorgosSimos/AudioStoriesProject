@@ -56,7 +56,7 @@ public class LibraryActivity extends AppCompatActivity {
         contact = findViewById(R.id.contact);
         login_logout = findViewById(R.id.login_logout);
         login_logout_text = findViewById(R.id.login_logout_text);
-        String userType = sharedPreferences.getString("UserType", "Visitor");
+        String userType = sharedPreferences.getString("UserType", "default_value");
         if (userType.equals("Visitor")){
             login_logout_text.setText("Sign In / Sign Up");
         } else {
