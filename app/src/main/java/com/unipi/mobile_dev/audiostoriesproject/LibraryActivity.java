@@ -7,6 +7,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -29,14 +30,15 @@ public class LibraryActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     ImageView burger_menu;
-    LinearLayout home, language, about, contact, logout;
+    LinearLayout home, language, about, contact, login_logout;
 
     BottomNavigationView bottomNavigationView;
-    TextView textSnowWhite, textKingMidas, textShoemaker, textTortoise, textRat, userInfo;
+    TextView textSnowWhite, textKingMidas, textShoemaker, textTortoise, textRat, userInfo, login_logout_text;
     private DatabaseReference languageRef;
     String selectedLanguage = "";
     FirebaseDatabase database;
     DatabaseReference reference;
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,12 +51,15 @@ public class LibraryActivity extends AppCompatActivity {
         language = findViewById(R.id.language);
         about = findViewById(R.id.about);
         contact = findViewById(R.id.contact);
-        logout = findViewById(R.id.logout);
+        login_logout = findViewById(R.id.login_logout);
+        login_logout_text = findViewById(R.id.login_logout_text);
         // Retrieve extra information from the Intent
         Intent intent = getIntent();
         String userType = intent.getStringExtra("UserType");
         if (userType != null && userType.equals("Visitor")){
-            logout.setVisibility(View.GONE);
+            login_logout_text.setText("Sign In / Sign Up");
+        } else {
+            login_logout_text.setText("Logout");
         }
         userInfo.setText(userType);
 
@@ -89,10 +94,14 @@ public class LibraryActivity extends AppCompatActivity {
             }
         });
 
-        logout.setOnClickListener(new View.OnClickListener() {
+        login_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LibraryActivity.this, "Logout Successfull", Toast.LENGTH_SHORT).show();
+                if (userType != null && userType.equals("Visitor")) {
+                    Toast.makeText(LibraryActivity.this, "Please sign in or sign up", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(LibraryActivity.this, "Logout Successfull", Toast.LENGTH_SHORT).show();
+                }
                 redirectActivity(LibraryActivity.this, WelcomeActivity.class);
             }
         });
