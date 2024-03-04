@@ -56,6 +56,93 @@ public class LibraryActivity extends AppCompatActivity {
         contact = findViewById(R.id.contact);
         login_logout = findViewById(R.id.login_logout);
         login_logout_text = findViewById(R.id.login_logout_text);
+        String userType = sharedPreferences.getString("UserType", "default_value");
+        if (userType.equals("Visitor")){
+            login_logout_text.setText("Sign In / Sign Up");
+        } else {
+            login_logout_text.setText("Logout");
+        }
+        userInfo.setText(userType);
+
+        burger_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDrawer(drawerLayout);
+            }
+        });
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recreate();
+            }
+        });
+        language.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showLanguageDialog();
+            }
+        });
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirectActivity(LibraryActivity.this, AboutActivity.class);
+            }
+        });
+        contact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirectActivity(LibraryActivity.this, ContactActivity.class);
+            }
+        });
+
+        login_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (userType.equals("Visitor")) {
+                    Toast.makeText(LibraryActivity.this, "Please sign in or sign up", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(LibraryActivity.this, "Logout Successfull", Toast.LENGTH_SHORT).show();
+                }
+                redirectActivity(LibraryActivity.this, WelcomeActivity.class);
+                SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
+                prefsEditor.clear();
+                prefsEditor.apply();
+            }
+        });
+
+        textSnowWhite = findViewById(R.id.textViewSnowWhite);
+        textKingMidas = findViewById(R.id.textViewMidas);
+        textShoemaker = findViewById(R.id.textViewShoemaker);
+        textTortoise = findViewById(R.id.textViewTortoise);
+        textRat = findViewById(R.id.textViewRat);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.library);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.library) {
+                return true;
+            } else if (itemId == R.id.music_player) {
+                Intent intentPlayer = new Intent(getApplicationContext(), MediaPlayerActivity.class);
+                intentPlayer.putExtra("ImageViewName","imageViewSnowWhite");// Default selection of Story 1
+                startActivity(intentPlayer);
+                overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
+                finish();
+                return true;
+            } else if (itemId == R.id.statistics) {
+                if (!userType.equals("Visitor")) {
+                    Intent intentStats = new Intent(getApplicationContext(), StatisticsActivity.class);
+                    startActivity(intentStats);
+                    overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
+                    finish();
+                } else {
+                    Toast.makeText(LibraryActivity.this, "Available only for logged in users!", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+
+            } else {
+                return false;
+            }
+        });
         database = FirebaseDatabase.getInstance();
         languageRef = FirebaseDatabase.getInstance().getReference("Language");
         // Retrieve extra information from the Intent
