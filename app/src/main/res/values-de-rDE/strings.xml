@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AudioStoriesProject</string>
+    <string name="play">spielen</string>
+    <string name="snow_white_and_the_seven_dwarfs">Schneewittchen</string>
+    <string name="read">lesen</string>
+    <string name="see_all_statistics">alle Statistiken</string>
+    <string name="king_midas">König Midas</string>
+    <string name="Shoemaker">Schuster</string>
+    <string name="the_hare_and_the_tortoise">der Hase und die Schildkröte</string>
+    <string name="posh_rat">schicke Ratte</string>
+    <string name="all_statistitcs">alle Statistiken</string>
+    <string name="most_favorite">am liebsten</string>
+    <string name="less_favorite">weniger beliebt</string>
+    <string name="cinderella">Aschenputtel</string>
+    <string name="cinderella2">Aschenputtel</string>
+    <string name="please_enter_your_email">Geben sie ihre E-Mail Adresse ein</string>
+    <string name="please_enter_your_password">Geben Sie Ihr Passwort ein</string>
+    <string name="visitor">Gast</string>
+    <string name="sign_in">Eintragen</string>
+    <string name="new_user_click_here">Neuer Benutzer? klicken Sie hier</string>
+    <string name="audio_story_title">Titel der Audio-Story</string>
+    <string name="author">Autor</string>
+    <string name="release_year">Erscheinungsjahr</string>
+    <string name="previous">Vorherige</string>
+    <string name="stop">Stoppen</string>
+    <string name="go_to_library">Geh zur Bibliothek</string>
+    <string name="next">Nächste</string>
+    <string name="back">Zurück</string>
+    <string name="speak_command">Sprechen Sie Befehl</string>
+</resources>

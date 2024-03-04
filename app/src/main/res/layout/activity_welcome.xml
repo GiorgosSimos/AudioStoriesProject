@@ -9,12 +9,12 @@
     tools:context="com.unipi.mobile_dev.audiostoriesproject.WelcomeActivity">
 
     <Button
-        android:id="@+id/sign_in_button"
+        android:id="@+id/visitor_button"
         android:layout_width="186dp"
         android:layout_height="54dp"
         android:backgroundTint="#E53935"
         android:onClick="visitor"
-        android:text="Visitor"
+        android:text="@string/visitor_new"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -28,7 +28,7 @@
         android:layout_height="64dp"
         android:background="#C5BBBB"
         android:ems="10"
-        android:hint="Please enter your email"
+        android:hint="@string/email_new"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +43,7 @@
         android:layout_height="64dp"
         android:background="#C5BBBB"
         android:ems="10"
-        android:hint="Please enter your password."
+        android:hint="@string/password_new"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,12 +53,12 @@
         app:layout_constraintVertical_bias="0.635" />
 
     <Button
-        android:id="@+id/sign_in_button"
+        android:id="@+id/signin_button"
         android:layout_width="186dp"
         android:layout_height="54dp"
         android:backgroundTint="#E53935"
         android:onClick="goSignIn"
-        android:text="Sign In"
+        android:text="@string/sign_in_new"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -72,7 +72,7 @@
         android:layout_height="55dp"
         android:clickable="true"
         android:onClick="goSignUp"
-        android:text="New User? Click here"
+        android:text="@string/new_user_click_here_new"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="16sp"
