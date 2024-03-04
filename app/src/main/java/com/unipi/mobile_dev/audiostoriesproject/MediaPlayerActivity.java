@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +33,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class MediaPlayerActivity extends AppCompatActivity {
+    SharedPreferences sharedPreferences;
 
     BottomNavigationView bottomNavigationView;
     ImageView storyImage;
@@ -50,6 +52,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_media_player);
+        sharedPreferences = getSharedPreferences("com.unipi.mobile_dev.audiostoriesproject", MODE_PRIVATE);
         storyImage = findViewById(R.id.imageViewMainPic);
         title = findViewById(R.id.textViewTitle);
         author = findViewById(R.id.textViewAuthor);
@@ -60,8 +63,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
         database = FirebaseDatabase.getInstance();
 
-        Intent intent = getIntent();
-        String userType = intent.getStringExtra("UserType");
+        String userType = sharedPreferences.getString("UserType", "Visitor");
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.music_player);
@@ -77,7 +79,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
             } else if (itemId == R.id.music_player) {
                 return true;
             } else if (itemId == R.id.statistics) {
-                if (userType != null && !userType.equals("Visitor")) {
+                if (!userType.equals("Visitor")) {
                     Intent intentStats = new Intent(getApplicationContext(), StatisticsActivity.class);
                     startActivity(intentStats);
                     overridePendingTransition(R.anim.slide_right, R.anim.slide_left);

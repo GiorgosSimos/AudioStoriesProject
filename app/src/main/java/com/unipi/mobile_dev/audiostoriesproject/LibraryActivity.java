@@ -11,6 +11,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -27,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class LibraryActivity extends AppCompatActivity {
+    SharedPreferences sharedPreferences;
 
     DrawerLayout drawerLayout;
     ImageView burger_menu;
@@ -43,6 +45,7 @@ public class LibraryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library);
+        sharedPreferences = getSharedPreferences("com.unipi.mobile_dev.audiostoriesproject", MODE_PRIVATE);
         // Link options of hamburger menu
         drawerLayout = findViewById(R.id.drawerLayout);
         burger_menu = findViewById(R.id.burger_menu);
@@ -53,10 +56,8 @@ public class LibraryActivity extends AppCompatActivity {
         contact = findViewById(R.id.contact);
         login_logout = findViewById(R.id.login_logout);
         login_logout_text = findViewById(R.id.login_logout_text);
-        // Retrieve extra information from the Intent
-        Intent intent = getIntent();
-        String userType = intent.getStringExtra("UserType");
-        if (userType != null && userType.equals("Visitor")){
+        String userType = sharedPreferences.getString("UserType", "Visitor");
+        if (userType.equals("Visitor")){
             login_logout_text.setText("Sign In / Sign Up");
         } else {
             login_logout_text.setText("Logout");
@@ -97,12 +98,15 @@ public class LibraryActivity extends AppCompatActivity {
         login_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (userType != null && userType.equals("Visitor")) {
+                if (userType.equals("Visitor")) {
                     Toast.makeText(LibraryActivity.this, "Please sign in or sign up", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(LibraryActivity.this, "Logout Successfull", Toast.LENGTH_SHORT).show();
                 }
                 redirectActivity(LibraryActivity.this, WelcomeActivity.class);
+                SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
+                prefsEditor.clear();
+                prefsEditor.apply();
             }
         });
 
@@ -125,7 +129,7 @@ public class LibraryActivity extends AppCompatActivity {
                 finish();
                 return true;
             } else if (itemId == R.id.statistics) {
-                if (userType != null && !userType.equals("Visitor")) {
+                if (!userType.equals("Visitor")) {
                     Intent intentStats = new Intent(getApplicationContext(), StatisticsActivity.class);
                     startActivity(intentStats);
                     overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
