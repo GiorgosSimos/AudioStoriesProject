@@ -51,6 +51,14 @@ public class LibraryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library);
+        database = FirebaseDatabase.getInstance();
+        languageRef = FirebaseDatabase.getInstance().getReference("Language");
+        reference = FirebaseDatabase.getInstance().getReference();
+        textSnowWhite = findViewById(R.id.textViewSnowWhite);
+        textKingMidas = findViewById(R.id.textViewMidas);
+        textShoemaker = findViewById(R.id.textViewShoemaker);
+        textTortoise = findViewById(R.id.textViewTortoise);
+        textRat = findViewById(R.id.textViewRat);
         sharedPreferences = getApplicationContext().getSharedPreferences("com.unipi.mobile_dev.audiostoriesproject", Context.MODE_PRIVATE);
         // Link options of hamburger menu
         drawerLayout = findViewById(R.id.drawerLayout);
@@ -69,7 +77,7 @@ public class LibraryActivity extends AppCompatActivity {
             login_logout_text.setText("Logout");
         }
         userInfo.setText(userType);
-        showMessage("Language",lan);
+        //showMessage("Language",lan);
 
         burger_menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +94,7 @@ public class LibraryActivity extends AppCompatActivity {
         language.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkLanguage();
+                showLanguageDialog();
             }
         });
         about.setOnClickListener(new View.OnClickListener() {
@@ -115,46 +123,40 @@ public class LibraryActivity extends AppCompatActivity {
                 prefsEditor.apply();
             }
         });
-
-            textSnowWhite = findViewById(R.id.textViewSnowWhite);
-            textKingMidas = findViewById(R.id.textViewMidas);
-            textShoemaker = findViewById(R.id.textViewShoemaker);
-            textTortoise = findViewById(R.id.textViewTortoise);
-            textRat = findViewById(R.id.textViewRat);
-            bottomNavigationView = findViewById(R.id.bottomNavigationView);
-            bottomNavigationView.setSelectedItemId(R.id.library);
-            bottomNavigationView.setOnItemSelectedListener(item -> {
-                int itemId = item.getItemId();
-                if (itemId == R.id.library) {
-                    return true;
-                } else if (itemId == R.id.music_player) {
-                    Intent intentPlayer = new Intent(getApplicationContext(), MediaPlayerActivity.class);
-                    intentPlayer.putExtra("ImageViewName", "imageViewSnowWhite");// Default selection of Story 1
-                    startActivity(intentPlayer);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.library);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.library) {
+                return true;
+            } else if (itemId == R.id.music_player) {
+                Intent intentPlayer = new Intent(getApplicationContext(), MediaPlayerActivity.class);
+                intentPlayer.putExtra("ImageViewName", "imageViewSnowWhite");// Default selection of Story 1
+                startActivity(intentPlayer);
+                overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
+                finish();
+                return true;
+            } else if (itemId == R.id.statistics) {
+                if (!userType.equals("Visitor")) {
+                    Intent intentStats = new Intent(getApplicationContext(), StatisticsActivity.class);
+                    startActivity(intentStats);
                     overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
                     finish();
-                    return true;
-                } else if (itemId == R.id.statistics) {
-                    if (!userType.equals("Visitor")) {
-                        Intent intentStats = new Intent(getApplicationContext(), StatisticsActivity.class);
-                        startActivity(intentStats);
-                        overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
-                        finish();
-                    } else {
-                        if(lan.equals("de")){
-                            Toast.makeText(LibraryActivity.this, "Nur für eingeloggte Benutzer verfügbar!", Toast.LENGTH_SHORT).show();
-                        }else if (lan.equals("it")){
-                            Toast.makeText(LibraryActivity.this, "Disponibile solo per gli utenti registrati!", Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(LibraryActivity.this, "Available only for logged in users!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    return true;
-
                 } else {
-                    return false;
+                    if(lan.equals("de")){
+                        Toast.makeText(LibraryActivity.this, "Nur für eingeloggte Benutzer verfügbar!", Toast.LENGTH_SHORT).show();
+                    }else if (lan.equals("it")){
+                        Toast.makeText(LibraryActivity.this, "Disponibile solo per gli utenti registrati!", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(LibraryActivity.this, "Available only for logged in users!", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            });
+                return true;
+
+            } else {
+                return false;
+            }
+        });
 
     }
     public static void openDrawer(DrawerLayout drawerLayout){
@@ -180,32 +182,22 @@ public class LibraryActivity extends AppCompatActivity {
         closeDrawer(drawerLayout);
     }
 
-    private void checkLanguage(){
-        reference = FirebaseDatabase.getInstance().getReference();
-        languageRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String language = snapshot.getValue(String.class);
-                showLanguageDialog();
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-
-    }
-
     private void showLanguageDialog() {
+        reference = FirebaseDatabase.getInstance().getReference();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Choose Language");
         String[] languages = {"English", "German", "Italian"};
         int checkedItem = -1; // No item selected by default
+
         builder.setSingleChoiceItems(languages, checkedItem, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 selectedLanguage = languages[i];
+                // Save the selected language preference to Realtime Database
+                // languageRef = FirebaseDatabase.getInstance().getReference("Language");
                 languageRef.setValue(selectedLanguage);
                 dialogInterface.dismiss();
+
                 fillTitles(selectedLanguage);
             }
         });
@@ -222,6 +214,7 @@ public class LibraryActivity extends AppCompatActivity {
                 String shoemakerTitle = snapshot.child("shoemaker_title").getValue(String.class);
                 String tortoiseTitle = snapshot.child("tortoise_title").getValue(String.class);
                 String ratTitle = snapshot.child("rat_title").getValue(String.class);
+                // String cinderellaTitle = snapshot.child("cinderella_title").getValue(String.class);
 
                 // Set the retrieved titles to the corresponding TextViews
                 textSnowWhite.setText(snowTitle);
