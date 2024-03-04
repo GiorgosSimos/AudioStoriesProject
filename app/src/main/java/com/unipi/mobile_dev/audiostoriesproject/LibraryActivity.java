@@ -53,6 +53,8 @@ public class LibraryActivity extends AppCompatActivity {
         contact = findViewById(R.id.contact);
         login_logout = findViewById(R.id.login_logout);
         login_logout_text = findViewById(R.id.login_logout_text);
+        database = FirebaseDatabase.getInstance();
+        languageRef = FirebaseDatabase.getInstance().getReference("Language");
         // Retrieve extra information from the Intent
         Intent intent = getIntent();
         String userType = intent.getStringExtra("UserType");
@@ -78,7 +80,7 @@ public class LibraryActivity extends AppCompatActivity {
         language.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showLanguageDialog();
+                checkLanguage();
             }
         });
         about.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +107,6 @@ public class LibraryActivity extends AppCompatActivity {
                 redirectActivity(LibraryActivity.this, WelcomeActivity.class);
             }
         });
-
         textSnowWhite = findViewById(R.id.textViewSnowWhite);
         textKingMidas = findViewById(R.id.textViewMidas);
         textShoemaker = findViewById(R.id.textViewShoemaker);
@@ -139,26 +140,6 @@ public class LibraryActivity extends AppCompatActivity {
                 return false;
             }
         });
-        database = FirebaseDatabase.getInstance();
-        languageRef = FirebaseDatabase.getInstance().getReference("Language");
-
-        reference = FirebaseDatabase.getInstance().getReference();
-        languageRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String language = snapshot.getValue(String.class);
-                if (TextUtils.isEmpty(language)) {
-                    showLanguageDialog();
-                }else{
-                    fillTitles(language);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Handle onCancelled
-            }
-        });
-
     }
 
     public static void openDrawer(DrawerLayout drawerLayout){
@@ -184,6 +165,20 @@ public class LibraryActivity extends AppCompatActivity {
         closeDrawer(drawerLayout);
     }
 
+    private void checkLanguage(){
+        reference = FirebaseDatabase.getInstance().getReference();
+        languageRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String language = snapshot.getValue(String.class);
+                showLanguageDialog();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+    }
     private void showLanguageDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Choose Language");
@@ -205,7 +200,6 @@ public class LibraryActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
     public void fillTitles(String language) {
         DatabaseReference languagesPref = reference.child("All_languages").child(language);
         languagesPref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -231,7 +225,6 @@ public class LibraryActivity extends AppCompatActivity {
             }
         });
     }
-
     public void navigateMediaPlayer(View view) {
         ImageView imageView = (ImageView) view;
         String imageViewName = getResources().getResourceEntryName(imageView.getId());

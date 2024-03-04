@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="Unipi Audio Stories"
+            android:text="@string/unipi_audio_stories"
             android:textStyle="bold"
             android:textColor="@color/white"/>
 
@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id = "@+id/user_info"
-            android:text="loggedInUser@gmail.com"
+            android:text="@string/loggedinuser_gmail_com"
             android:textColor="@color/white"
             android:textSize="14sp"/>
 
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/lavender"
-            android:text="Home"
+            android:text="@string/home"
             android:textSize="20sp"
             android:drawableLeft="@drawable/home_16"
             android:drawablePadding="8dp"/>
@@ -70,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/lavender"
-            android:text="Library Language"
+            android:text="@string/library_language"
             android:textSize="20sp"
             android:drawableLeft="@drawable/language_16"
             android:drawablePadding="8dp"/>
@@ -89,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/lavender"
-            android:text="About"
+            android:text="@string/about"
             android:textSize="20sp"
             android:drawableLeft="@drawable/about_16"
             android:drawablePadding="8dp"/>
@@ -108,7 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/lavender"
-            android:text="Contact Form"
+            android:text="@string/contact_form"
             android:textSize="20sp"
             android:drawableLeft="@drawable/contact_16"
             android:drawablePadding="8dp"/>
@@ -134,7 +134,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/lavender"
             android:id="@+id/login_logout_text"
-            android:text="Logout"
+            android:text="@string/logout"
             android:textSize="20sp"
             android:drawableLeft="@drawable/logout_16"
             android:drawablePadding="8dp"/>

@@ -29,6 +29,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Objects;
 
 public class MediaPlayerActivity extends AppCompatActivity {
@@ -163,6 +164,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
     public void readStory() {
         stopButton.setVisibility(View.VISIBLE);
         playButton.setVisibility(View.GONE);
+
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -180,9 +182,9 @@ public class MediaPlayerActivity extends AppCompatActivity {
                 }catch (IOException e){
                     throw new RuntimeException(e);
                 }
-                title.setText("Title: "+Objects.requireNonNull(snapshot.child("Title").getValue()).toString());
-                author.setText("Author: "+Objects.requireNonNull(snapshot.child("Author").getValue()).toString());
-                year.setText("Year: "+Objects.requireNonNull(snapshot.child("Year").getValue()).toString());
+                title.setText(title.getHint() + ": " + Objects.requireNonNull(snapshot.child("Title").getValue()).toString());
+                author.setText(author.getHint() + ": " + Objects.requireNonNull(snapshot.child("Author").getValue()).toString());
+                year.setText(year.getHint() + ": " + Objects.requireNonNull(snapshot.child("Year").getValue()).toString());
                 mytts.speak(Objects.requireNonNull(snapshot.child("Description").getValue()).toString());
 
                 int shows = Integer.parseInt(snapshot.child("Shows").getValue().toString());

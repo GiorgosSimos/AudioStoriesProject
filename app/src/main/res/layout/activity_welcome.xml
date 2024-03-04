@@ -72,7 +72,7 @@
         android:layout_height="55dp"
         android:clickable="true"
         android:onClick="goSignUp"
-        android:text="@string/new_user_click_here_new"
+        android:text="@string/new_user_click_here_new2"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="16sp"
