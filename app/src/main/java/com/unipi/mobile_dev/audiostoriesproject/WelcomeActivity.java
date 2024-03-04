@@ -6,24 +6,22 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Vibrator;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
 public class WelcomeActivity extends AppCompatActivity {
+    SharedPreferences sharedPreferences;
     private DatabaseReference languageRef;
     EditText email,password;
     FirebaseAuth mAuth;
@@ -33,6 +31,8 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+        sharedPreferences = getSharedPreferences("com.unipi.mobile_dev.audiostoriesproject", MODE_PRIVATE);
+        sharedPreferences.getString("userType","Visitor");
         email = findViewById(R.id.editTextEmailAddress);
         password = findViewById(R.id.editTextPassword);
         mAuth = FirebaseAuth.getInstance();
@@ -49,8 +49,10 @@ public class WelcomeActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
                                 showMessage("Success","User signed in successfully!");
+                                SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
+                                prefsEditor.putString("UserType", email.getText().toString());
+                                prefsEditor.apply();
                                 Intent intent = new Intent(WelcomeActivity.this, LibraryActivity.class);
-                                intent.putExtra("UserType", email.getText().toString());
                                 startActivity(intent);
                             }else {
                                 showMessage("Error",task.getException().getLocalizedMessage());
@@ -70,7 +72,6 @@ public class WelcomeActivity extends AppCompatActivity {
 
     public void visitor(View view) {
         Intent intent = new Intent(this, LibraryActivity.class);
-        intent.putExtra("UserType", "Visitor");
         startActivity(intent);
     }
 

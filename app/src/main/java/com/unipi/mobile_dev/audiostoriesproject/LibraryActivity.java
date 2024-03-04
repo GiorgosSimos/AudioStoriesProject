@@ -11,6 +11,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -27,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class LibraryActivity extends AppCompatActivity {
+    SharedPreferences sharedPreferences;
 
     DrawerLayout drawerLayout;
     ImageView burger_menu;
@@ -43,6 +45,7 @@ public class LibraryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library);
+        sharedPreferences = getSharedPreferences("com.unipi.mobile_dev.audiostoriesproject", MODE_PRIVATE);
         // Link options of hamburger menu
         drawerLayout = findViewById(R.id.drawerLayout);
         burger_menu = findViewById(R.id.burger_menu);
@@ -58,90 +61,95 @@ public class LibraryActivity extends AppCompatActivity {
         // Retrieve extra information from the Intent
         Intent intent = getIntent();
         String userType = intent.getStringExtra("UserType");
-        if (userType != null && userType.equals("Visitor")){
-            login_logout_text.setText("Sign In / Sign Up");
-        } else {
-            login_logout_text.setText("Logout");
-        }
-        userInfo.setText(userType);
+        if (userType != null && userType.equals("Visitor")) {
+            String userType = sharedPreferences.getString("UserType", "Visitor");
+            if (userType.equals("Visitor")) {
+                login_logout_text.setText("Sign In / Sign Up");
+            } else {
+                login_logout_text.setText("Logout");
+            }
+            userInfo.setText(userType);
 
-        burger_menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openDrawer(drawerLayout);
-            }
-        });
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                recreate();
-            }
-        });
-        language.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkLanguage();
-            }
-        });
-        about.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                redirectActivity(LibraryActivity.this, AboutActivity.class);
-            }
-        });
-        contact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                redirectActivity(LibraryActivity.this, ContactActivity.class);
-            }
-        });
-
-        login_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (userType != null && userType.equals("Visitor")) {
-                    Toast.makeText(LibraryActivity.this, "Please sign in or sign up", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(LibraryActivity.this, "Logout Successfull", Toast.LENGTH_SHORT).show();
+            burger_menu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openDrawer(drawerLayout);
                 }
-                redirectActivity(LibraryActivity.this, WelcomeActivity.class);
-            }
-        });
-        textSnowWhite = findViewById(R.id.textViewSnowWhite);
-        textKingMidas = findViewById(R.id.textViewMidas);
-        textShoemaker = findViewById(R.id.textViewShoemaker);
-        textTortoise = findViewById(R.id.textViewTortoise);
-        textRat = findViewById(R.id.textViewRat);
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setSelectedItemId(R.id.library);
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-            int itemId = item.getItemId();
-            if (itemId == R.id.library) {
-                return true;
-            } else if (itemId == R.id.music_player) {
-                Intent intentPlayer = new Intent(getApplicationContext(), MediaPlayerActivity.class);
-                intentPlayer.putExtra("ImageViewName","imageViewSnowWhite");// Default selection of Story 1
-                startActivity(intentPlayer);
-                overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
-                finish();
-                return true;
-            } else if (itemId == R.id.statistics) {
-                if (userType != null && !userType.equals("Visitor")) {
-                    Intent intentStats = new Intent(getApplicationContext(), StatisticsActivity.class);
-                    startActivity(intentStats);
+            });
+            home.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    recreate();
+                }
+            });
+            language.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    checkLanguage();
+                }
+            });
+            about.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    redirectActivity(LibraryActivity.this, AboutActivity.class);
+                }
+            });
+            contact.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    redirectActivity(LibraryActivity.this, ContactActivity.class);
+                }
+            });
+
+            login_logout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (userType.equals("Visitor")) {
+                        Toast.makeText(LibraryActivity.this, "Please sign in or sign up", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(LibraryActivity.this, "Logout Successfull", Toast.LENGTH_SHORT).show();
+                    }
+                    redirectActivity(LibraryActivity.this, WelcomeActivity.class);
+                    SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
+                    prefsEditor.clear();
+                    prefsEditor.apply();
+                }
+            });
+            textSnowWhite = findViewById(R.id.textViewSnowWhite);
+            textKingMidas = findViewById(R.id.textViewMidas);
+            textShoemaker = findViewById(R.id.textViewShoemaker);
+            textTortoise = findViewById(R.id.textViewTortoise);
+            textRat = findViewById(R.id.textViewRat);
+            bottomNavigationView = findViewById(R.id.bottomNavigationView);
+            bottomNavigationView.setSelectedItemId(R.id.library);
+            bottomNavigationView.setOnItemSelectedListener(item -> {
+                int itemId = item.getItemId();
+                if (itemId == R.id.library) {
+                    return true;
+                } else if (itemId == R.id.music_player) {
+                    Intent intentPlayer = new Intent(getApplicationContext(), MediaPlayerActivity.class);
+                    intentPlayer.putExtra("ImageViewName", "imageViewSnowWhite");// Default selection of Story 1
+                    startActivity(intentPlayer);
                     overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
                     finish();
+                    return true;
+                } else if (itemId == R.id.statistics) {
+                    if (!userType.equals("Visitor")) {
+                        Intent intentStats = new Intent(getApplicationContext(), StatisticsActivity.class);
+                        startActivity(intentStats);
+                        overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
+                        finish();
+                    } else {
+                        Toast.makeText(LibraryActivity.this, "Available only for logged in users!", Toast.LENGTH_SHORT).show();
+                    }
+                    return true;
+
                 } else {
-                    Toast.makeText(LibraryActivity.this, "Available only for logged in users!", Toast.LENGTH_SHORT).show();
+                    return false;
                 }
-                return true;
-
-            } else {
-                return false;
-            }
-        });
+            });
+        }
     }
-
     public static void openDrawer(DrawerLayout drawerLayout){
         drawerLayout.openDrawer(GravityCompat.START);
     }
@@ -179,6 +187,14 @@ public class LibraryActivity extends AppCompatActivity {
         });
 
     }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
+
     private void showLanguageDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Choose Language");
