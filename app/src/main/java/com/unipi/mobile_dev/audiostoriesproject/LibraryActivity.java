@@ -27,12 +27,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Locale;
+
 public class LibraryActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
-
+    // Retrieve system's default locale language
+    Locale defaultLocale = Locale.getDefault();
+    String lan = defaultLocale.getLanguage();
     DrawerLayout drawerLayout;
     ImageView burger_menu;
     LinearLayout home, language, about, contact, login_logout;
+    String userType ="";
 
     BottomNavigationView bottomNavigationView;
     TextView textSnowWhite, textKingMidas, textShoemaker, textTortoise, textRat, userInfo, login_logout_text;
@@ -56,13 +61,14 @@ public class LibraryActivity extends AppCompatActivity {
         contact = findViewById(R.id.contact);
         login_logout = findViewById(R.id.login_logout);
         login_logout_text = findViewById(R.id.login_logout_text);
-        String userType = sharedPreferences.getString("UserType", "default_value");
+        userType = sharedPreferences.getString("UserType", "default_value");
         if (userType.equals("Visitor")){
             login_logout_text.setText("Sign In / Sign Up");
         } else {
             login_logout_text.setText("Logout");
         }
         userInfo.setText(userType);
+        showMessage("Language",lan);
 
         burger_menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +85,7 @@ public class LibraryActivity extends AppCompatActivity {
         language.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showLanguageDialog();
+                checkLanguage();
             }
         });
         about.setOnClickListener(new View.OnClickListener() {
@@ -94,7 +100,6 @@ public class LibraryActivity extends AppCompatActivity {
                 redirectActivity(LibraryActivity.this, ContactActivity.class);
             }
         });
-
         login_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,46 +115,10 @@ public class LibraryActivity extends AppCompatActivity {
             }
         });
 
-        textSnowWhite = findViewById(R.id.textViewSnowWhite);
-        textKingMidas = findViewById(R.id.textViewMidas);
-        textShoemaker = findViewById(R.id.textViewShoemaker);
-        textTortoise = findViewById(R.id.textViewTortoise);
-        textRat = findViewById(R.id.textViewRat);
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setSelectedItemId(R.id.library);
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-            int itemId = item.getItemId();
-            if (itemId == R.id.library) {
-                return true;
-            } else if (itemId == R.id.music_player) {
-                Intent intentPlayer = new Intent(getApplicationContext(), MediaPlayerActivity.class);
-                intentPlayer.putExtra("ImageViewName","imageViewSnowWhite");// Default selection of Story 1
-                startActivity(intentPlayer);
-                overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
-                finish();
-                return true;
-            } else if (itemId == R.id.statistics) {
-                if (!userType.equals("Visitor")) {
-                    Intent intentStats = new Intent(getApplicationContext(), StatisticsActivity.class);
-                    startActivity(intentStats);
-                    overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
-                    finish();
-                } else {
-                    Toast.makeText(LibraryActivity.this, "Available only for logged in users!", Toast.LENGTH_SHORT).show();
-                }
-                return true;
-
-            } else {
-                return false;
-            }
-        });
-        database = FirebaseDatabase.getInstance();
-        languageRef = FirebaseDatabase.getInstance().getReference("Language");
         // Retrieve extra information from the Intent
         Intent intent = getIntent();
-        String userType = intent.getStringExtra("UserType");
+        userType = intent.getStringExtra("UserType");
         if (userType != null && userType.equals("Visitor")) {
-            String userType = sharedPreferences.getString("UserType", "Visitor");
             if (userType.equals("Visitor")) {
                 login_logout_text.setText("Sign In / Sign Up");
             } else {
@@ -157,51 +126,6 @@ public class LibraryActivity extends AppCompatActivity {
             }
             userInfo.setText(userType);
 
-            burger_menu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    openDrawer(drawerLayout);
-                }
-            });
-            home.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    recreate();
-                }
-            });
-            language.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    checkLanguage();
-                }
-            });
-            about.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    redirectActivity(LibraryActivity.this, AboutActivity.class);
-                }
-            });
-            contact.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    redirectActivity(LibraryActivity.this, ContactActivity.class);
-                }
-            });
-
-            login_logout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (userType.equals("Visitor")) {
-                        Toast.makeText(LibraryActivity.this, "Please sign in or sign up", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(LibraryActivity.this, "Logout Successfull", Toast.LENGTH_SHORT).show();
-                    }
-                    redirectActivity(LibraryActivity.this, WelcomeActivity.class);
-                    SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
-                    prefsEditor.clear();
-                    prefsEditor.apply();
-                }
-            });
             textSnowWhite = findViewById(R.id.textViewSnowWhite);
             textKingMidas = findViewById(R.id.textViewMidas);
             textShoemaker = findViewById(R.id.textViewShoemaker);
@@ -227,7 +151,13 @@ public class LibraryActivity extends AppCompatActivity {
                         overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
                         finish();
                     } else {
-                        Toast.makeText(LibraryActivity.this, "Available only for logged in users!", Toast.LENGTH_SHORT).show();
+                        if(lan.equals("de")){
+                            Toast.makeText(LibraryActivity.this, "Nur für eingeloggte Benutzer verfügbar!", Toast.LENGTH_SHORT).show();
+                        }else if (lan.equals("it")){
+                            Toast.makeText(LibraryActivity.this, "Disponibile solo per gli utenti registrati!", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(LibraryActivity.this, "Available only for logged in users!", Toast.LENGTH_SHORT).show();
+                        }
                     }
                     return true;
 
@@ -287,16 +217,12 @@ public class LibraryActivity extends AppCompatActivity {
         builder.setTitle("Choose Language");
         String[] languages = {"English", "German", "Italian"};
         int checkedItem = -1; // No item selected by default
-
         builder.setSingleChoiceItems(languages, checkedItem, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 selectedLanguage = languages[i];
-                // Save the selected language preference to Realtime Database
-               // languageRef = FirebaseDatabase.getInstance().getReference("Language");
                 languageRef.setValue(selectedLanguage);
                 dialogInterface.dismiss();
-
                 fillTitles(selectedLanguage);
             }
         });
