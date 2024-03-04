@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -50,7 +51,7 @@ public class LibraryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library);
-        sharedPreferences = getSharedPreferences("com.unipi.mobile_dev.audiostoriesproject", MODE_PRIVATE);
+        sharedPreferences = getApplicationContext().getSharedPreferences("com.unipi.mobile_dev.audiostoriesproject", Context.MODE_PRIVATE);
         // Link options of hamburger menu
         drawerLayout = findViewById(R.id.drawerLayout);
         burger_menu = findViewById(R.id.burger_menu);
@@ -61,7 +62,7 @@ public class LibraryActivity extends AppCompatActivity {
         contact = findViewById(R.id.contact);
         login_logout = findViewById(R.id.login_logout);
         login_logout_text = findViewById(R.id.login_logout_text);
-        userType = sharedPreferences.getString("UserType", "default_value");
+        userType = sharedPreferences.getString("UserType", "");
         if (userType.equals("Visitor")){
             login_logout_text.setText("Sign In / Sign Up");
         } else {
@@ -115,17 +116,6 @@ public class LibraryActivity extends AppCompatActivity {
             }
         });
 
-        // Retrieve extra information from the Intent
-        Intent intent = getIntent();
-        userType = intent.getStringExtra("UserType");
-        if (userType != null && userType.equals("Visitor")) {
-            if (userType.equals("Visitor")) {
-                login_logout_text.setText("Sign In / Sign Up");
-            } else {
-                login_logout_text.setText("Logout");
-            }
-            userInfo.setText(userType);
-
             textSnowWhite = findViewById(R.id.textViewSnowWhite);
             textKingMidas = findViewById(R.id.textViewMidas);
             textShoemaker = findViewById(R.id.textViewShoemaker);
@@ -165,7 +155,7 @@ public class LibraryActivity extends AppCompatActivity {
                     return false;
                 }
             });
-        }
+
     }
     public static void openDrawer(DrawerLayout drawerLayout){
         drawerLayout.openDrawer(GravityCompat.START);
@@ -203,13 +193,6 @@ public class LibraryActivity extends AppCompatActivity {
             }
         });
 
-    }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
     }
 
     private void showLanguageDialog() {
