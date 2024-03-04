@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -61,6 +62,7 @@ public class LibraryActivity extends AppCompatActivity {
         textTortoise = findViewById(R.id.textViewTortoise);
         textRat = findViewById(R.id.textViewRat);
         sharedPreferences = getSharedPreferences("com.unipi.mobile_dev.audiostoriesproject", MODE_PRIVATE);
+        sharedPreferences = getApplicationContext().getSharedPreferences("com.unipi.mobile_dev.audiostoriesproject", Context.MODE_PRIVATE);
         // Link options of hamburger menu
         drawerLayout = findViewById(R.id.drawerLayout);
         burger_menu = findViewById(R.id.burger_menu);
@@ -73,13 +75,14 @@ public class LibraryActivity extends AppCompatActivity {
         login_logout_text = findViewById(R.id.login_logout_text);
         userType = sharedPreferences.getString("UserType", "default_value");
 
-        if (userType.equals("Visitor")){
+        userType = sharedPreferences.getString("UserType", "");
+        if (userType.equals("Visitor")) {
             login_logout_text.setText("Sign In / Sign Up");
         } else {
             login_logout_text.setText("Logout");
         }
         userInfo.setText(userType);
-       // showMessage("Language",lan);
+        // showMessage("Language",lan);
 
         burger_menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,11 +159,11 @@ public class LibraryActivity extends AppCompatActivity {
                         overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
                         finish();
                     } else {
-                        if(lan.equals("de")){
+                        if (lan.equals("de")) {
                             Toast.makeText(LibraryActivity.this, "Nur für eingeloggte Benutzer verfügbar!", Toast.LENGTH_SHORT).show();
-                        }else if (lan.equals("it")){
+                        } else if (lan.equals("it")) {
                             Toast.makeText(LibraryActivity.this, "Disponibile solo per gli utenti registrati!", Toast.LENGTH_SHORT).show();
-                        }else{
+                        } else {
                             Toast.makeText(LibraryActivity.this, "Available only for logged in users!", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -170,6 +173,7 @@ public class LibraryActivity extends AppCompatActivity {
                     return false;
                 }
             });
+
         }
     }
     public static void openDrawer(DrawerLayout drawerLayout){
@@ -222,10 +226,9 @@ public class LibraryActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
     public void fillTitles(String language) {
         DatabaseReference languagesPref = reference.child("All_languages").child(language);
-       languagesPref.addListenerForSingleValueEvent(new ValueEventListener() {
+        languagesPref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String snowTitle = snapshot.child("snow_title").getValue(String.class);
@@ -233,7 +236,7 @@ public class LibraryActivity extends AppCompatActivity {
                 String shoemakerTitle = snapshot.child("shoemaker_title").getValue(String.class);
                 String tortoiseTitle = snapshot.child("tortoise_title").getValue(String.class);
                 String ratTitle = snapshot.child("rat_title").getValue(String.class);
-               // String cinderellaTitle = snapshot.child("cinderella_title").getValue(String.class);
+                // String cinderellaTitle = snapshot.child("cinderella_title").getValue(String.class);
 
                 // Set the retrieved titles to the corresponding TextViews
                 textSnowWhite.setText(snowTitle);
@@ -248,7 +251,7 @@ public class LibraryActivity extends AppCompatActivity {
                 showMessage("Error", "Failed to read story titles");
             }
         });
-    }
+        }
 
     public void navigateMediaPlayer(View view) {
         ImageView imageView = (ImageView) view;
