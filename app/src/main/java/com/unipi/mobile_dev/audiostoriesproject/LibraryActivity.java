@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -44,12 +45,21 @@ public class LibraryActivity extends AppCompatActivity {
     private DatabaseReference languageRef;
     String selectedLanguage = "";
     FirebaseDatabase database;
+
     DatabaseReference reference;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library);
+        database = FirebaseDatabase.getInstance();
+        languageRef = FirebaseDatabase.getInstance().getReference("Language");
+        reference = FirebaseDatabase.getInstance().getReference();
+        textSnowWhite = findViewById(R.id.textViewSnowWhite);
+        textKingMidas = findViewById(R.id.textViewMidas);
+        textShoemaker = findViewById(R.id.textViewShoemaker);
+        textTortoise = findViewById(R.id.textViewTortoise);
+        textRat = findViewById(R.id.textViewRat);
         sharedPreferences = getSharedPreferences("com.unipi.mobile_dev.audiostoriesproject", MODE_PRIVATE);
         // Link options of hamburger menu
         drawerLayout = findViewById(R.id.drawerLayout);
@@ -62,13 +72,14 @@ public class LibraryActivity extends AppCompatActivity {
         login_logout = findViewById(R.id.login_logout);
         login_logout_text = findViewById(R.id.login_logout_text);
         userType = sharedPreferences.getString("UserType", "default_value");
+
         if (userType.equals("Visitor")){
             login_logout_text.setText("Sign In / Sign Up");
         } else {
             login_logout_text.setText("Logout");
         }
         userInfo.setText(userType);
-        showMessage("Language",lan);
+       // showMessage("Language",lan);
 
         burger_menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +96,7 @@ public class LibraryActivity extends AppCompatActivity {
         language.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkLanguage();
+                showLanguageDialog();
             }
         });
         about.setOnClickListener(new View.OnClickListener() {
@@ -125,12 +136,6 @@ public class LibraryActivity extends AppCompatActivity {
                 login_logout_text.setText("Logout");
             }
             userInfo.setText(userType);
-
-            textSnowWhite = findViewById(R.id.textViewSnowWhite);
-            textKingMidas = findViewById(R.id.textViewMidas);
-            textShoemaker = findViewById(R.id.textViewShoemaker);
-            textTortoise = findViewById(R.id.textViewTortoise);
-            textRat = findViewById(R.id.textViewRat);
             bottomNavigationView = findViewById(R.id.bottomNavigationView);
             bottomNavigationView.setSelectedItemId(R.id.library);
             bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -176,33 +181,16 @@ public class LibraryActivity extends AppCompatActivity {
             drawerLayout.closeDrawer(GravityCompat.START);
         }
     }
-
     public static void redirectActivity(Activity activity, Class secondActivity){
         Intent intent = new Intent(activity, secondActivity);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
         activity.finish();
     }
-
     @Override
     protected void onPause() {
         super.onPause();
         closeDrawer(drawerLayout);
-    }
-
-    private void checkLanguage(){
-        reference = FirebaseDatabase.getInstance().getReference();
-        languageRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String language = snapshot.getValue(String.class);
-                showLanguageDialog();
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-
     }
     @Override
     protected void onDestroy() {
@@ -213,25 +201,31 @@ public class LibraryActivity extends AppCompatActivity {
     }
 
     private void showLanguageDialog() {
+        reference = FirebaseDatabase.getInstance().getReference();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Choose Language");
         String[] languages = {"English", "German", "Italian"};
         int checkedItem = -1; // No item selected by default
+
         builder.setSingleChoiceItems(languages, checkedItem, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 selectedLanguage = languages[i];
+                // Save the selected language preference to Realtime Database
+                // languageRef = FirebaseDatabase.getInstance().getReference("Language");
                 languageRef.setValue(selectedLanguage);
                 dialogInterface.dismiss();
+
                 fillTitles(selectedLanguage);
             }
         });
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
     public void fillTitles(String language) {
         DatabaseReference languagesPref = reference.child("All_languages").child(language);
-        languagesPref.addListenerForSingleValueEvent(new ValueEventListener() {
+       languagesPref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String snowTitle = snapshot.child("snow_title").getValue(String.class);
@@ -239,6 +233,7 @@ public class LibraryActivity extends AppCompatActivity {
                 String shoemakerTitle = snapshot.child("shoemaker_title").getValue(String.class);
                 String tortoiseTitle = snapshot.child("tortoise_title").getValue(String.class);
                 String ratTitle = snapshot.child("rat_title").getValue(String.class);
+               // String cinderellaTitle = snapshot.child("cinderella_title").getValue(String.class);
 
                 // Set the retrieved titles to the corresponding TextViews
                 textSnowWhite.setText(snowTitle);
@@ -254,6 +249,7 @@ public class LibraryActivity extends AppCompatActivity {
             }
         });
     }
+
     public void navigateMediaPlayer(View view) {
         ImageView imageView = (ImageView) view;
         String imageViewName = getResources().getResourceEntryName(imageView.getId());
@@ -268,7 +264,6 @@ public class LibraryActivity extends AppCompatActivity {
                 .setCancelable(true)
                 .show();
     }
-
     public void viewStatistics(View view) {
         Intent intent = new Intent(this, StatisticsActivity.class);
         startActivity(intent);
