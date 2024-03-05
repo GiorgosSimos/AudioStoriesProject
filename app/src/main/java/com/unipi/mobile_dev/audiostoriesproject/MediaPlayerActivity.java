@@ -81,6 +81,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
                 return true;
             } else if (itemId == R.id.statistics) {
                 if (!userType.equals("Visitor")) {
+                    stop();
                     Intent intentStats = new Intent(getApplicationContext(), StatisticsActivity.class);
                     startActivity(intentStats);
                     overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
@@ -331,11 +332,6 @@ public class MediaPlayerActivity extends AppCompatActivity {
     }
     public void stop(View view){
         stop();
-    }
-    public void previousActivity(View view){
-        stop();
-        Intent intent = new Intent(this,LibraryActivity.class);
-        startActivity(intent);
     }
 
 }

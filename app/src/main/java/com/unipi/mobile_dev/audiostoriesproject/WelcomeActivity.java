@@ -20,6 +20,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Locale;
+
 
 public class WelcomeActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
@@ -27,6 +29,7 @@ public class WelcomeActivity extends AppCompatActivity {
     EditText email,password;
     FirebaseAuth mAuth;
     FirebaseUser user;
+    String language = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,8 @@ public class WelcomeActivity extends AppCompatActivity {
         user = mAuth.getCurrentUser();
         languageRef = FirebaseDatabase.getInstance().getReference("Language");
         languageRef.setValue("");
+        Locale defaultLocale = Locale.getDefault();
+        language = defaultLocale.getLanguage();
     }
 
     public void goSignIn(View view) {
@@ -61,6 +66,13 @@ public class WelcomeActivity extends AppCompatActivity {
                     });
 
         }else {
+            if ("de".equals(language)){
+                showMessage("Fehler", "Bitte geben Sie fie Informationen an!");
+            } else if ("it".equals(language)) {
+                showMessage("Errore", "Si prega di fornire le informazioni!");
+            } else {// Default:English
+
+            }
             showMessage("Error","Please provide the information!");
         }
     }

@@ -176,24 +176,6 @@ public class StatisticsActivity extends AppCompatActivity {
         }
     }
 
-
-
-
- /*   @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==123 && resultCode==RESULT_OK){
-            ArrayList<String> recognizedText = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-            try {
-                this.getWindow().getDecorView().setBackgroundColor(Color.parseColor(recognizedText.get(0)));
-            }catch (IllegalArgumentException e){
-                showMessage("Error","Please say a valid color");
-            }
-            showMessage("Recognized",recognizedText.toString());
-        }
-    } */
-
-
     void showMessage(String title, String message){
         new AlertDialog.Builder(this).setTitle(title).setMessage(message).setCancelable(true).show();
     }

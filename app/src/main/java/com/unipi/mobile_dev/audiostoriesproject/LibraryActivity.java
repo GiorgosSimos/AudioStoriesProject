@@ -14,7 +14,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -245,11 +244,6 @@ public class LibraryActivity extends AppCompatActivity {
                 .setMessage("ImageView Name: " + name)
                 .setCancelable(true)
                 .show();
-    }
-
-    public void viewStatistics(View view) {
-        Intent intent = new Intent(this, StatisticsActivity.class);
-        startActivity(intent);
     }
 
 }
