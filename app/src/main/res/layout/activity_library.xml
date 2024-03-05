@@ -67,12 +67,12 @@
 
         <ImageView
             android:id="@+id/imageViewMidas"
-            android:layout_width="64dp"
-            android:layout_height="55dp"
+            android:layout_width="67dp"
+            android:layout_height="64dp"
             android:onClick="navigateMediaPlayer"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.031"
+            app:layout_constraintHorizontal_bias="0.024"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.264"
@@ -80,12 +80,13 @@
 
         <ImageView
             android:id="@+id/imageViewShoemaker"
-            android:layout_width="73dp"
-            android:layout_height="45dp"
+            android:layout_width="67dp"
+            android:layout_height="64dp"
             android:onClick="navigateMediaPlayer"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.02"
+            app:layout_constraintHorizontal_bias="0.024"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.372"
@@ -93,22 +94,24 @@
 
         <ImageView
             android:id="@+id/imageViewTortoise"
-            android:layout_width="73dp"
-            android:layout_height="60dp"
+            android:layout_width="67dp"
+            android:layout_height="64dp"
             android:onClick="navigateMediaPlayer"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.02"
+            app:layout_constraintHorizontal_bias="0.024"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.499"
+            app:layout_constraintVertical_bias="0.485"
             app:srcCompat="@drawable/tortoise_and_rabbit" />
 
         <ImageView
             android:id="@+id/imageViewRat"
-            android:layout_width="78dp"
-            android:layout_height="48dp"
+            android:layout_width="67dp"
+            android:layout_height="64dp"
             android:onClick="navigateMediaPlayer"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.024"
@@ -162,6 +165,35 @@
             app:layout_constraintStart_toEndOf="@id/imageViewRat"
             android:layout_marginStart="15dp"
             />
+
+        <ImageView
+            android:id="@+id/imageViewCinderella"
+            android:layout_width="67dp"
+            android:layout_height="64dp"
+            android:clickable="true"
+            android:onClick="navigateMediaPlayer"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.024"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.72"
+            app:srcCompat="@drawable/cinderella" />
+
+        <TextView
+            android:id="@+id/textViewCinderella"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/cinderella"
+            android:textColor="#673AB7"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:typeface="monospace"
+            app:layout_constraintTop_toTopOf="@+id/imageViewCinderella"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewCinderella"
+            app:layout_constraintStart_toEndOf="@+id/imageViewCinderella"
+            android:layout_marginStart="15dp" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"

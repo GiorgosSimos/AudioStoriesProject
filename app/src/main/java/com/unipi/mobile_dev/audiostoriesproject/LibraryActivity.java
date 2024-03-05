@@ -41,7 +41,7 @@ public class LibraryActivity extends AppCompatActivity {
     String userType ="";
 
     BottomNavigationView bottomNavigationView;
-    TextView textSnowWhite, textKingMidas, textShoemaker, textTortoise, textRat, userInfo, login_logout_text;
+    TextView textSnowWhite, textKingMidas, textShoemaker, textTortoise, textRat, textCinderella, userInfo, login_logout_text;
     private DatabaseReference languageRef;
     String selectedLanguage = "";
     FirebaseDatabase database;
@@ -59,6 +59,7 @@ public class LibraryActivity extends AppCompatActivity {
         textShoemaker = findViewById(R.id.textViewShoemaker);
         textTortoise = findViewById(R.id.textViewTortoise);
         textRat = findViewById(R.id.textViewRat);
+        textCinderella = findViewById(R.id.textViewCinderella);
         sharedPreferences = getApplicationContext().getSharedPreferences("com.unipi.mobile_dev.audiostoriesproject", Context.MODE_PRIVATE);
         // Link options of hamburger menu
         drawerLayout = findViewById(R.id.drawerLayout);
@@ -214,7 +215,7 @@ public class LibraryActivity extends AppCompatActivity {
                 String shoemakerTitle = snapshot.child("shoemaker_title").getValue(String.class);
                 String tortoiseTitle = snapshot.child("tortoise_title").getValue(String.class);
                 String ratTitle = snapshot.child("rat_title").getValue(String.class);
-                // String cinderellaTitle = snapshot.child("cinderella_title").getValue(String.class);
+                String cinderellaTitle = snapshot.child("cinderella_title").getValue(String.class);
 
                 // Set the retrieved titles to the corresponding TextViews
                 textSnowWhite.setText(snowTitle);
@@ -222,6 +223,7 @@ public class LibraryActivity extends AppCompatActivity {
                 textShoemaker.setText(shoemakerTitle);
                 textTortoise.setText(tortoiseTitle);
                 textRat.setText(ratTitle);
+                textCinderella.setText(cinderellaTitle);
             }
 
             @Override

@@ -134,6 +134,12 @@ public class MediaPlayerActivity extends AppCompatActivity {
                 currentId = 5;
                 type = "png";
                 break;
+            case "imageViewCinderella":
+                reference = database.getReference("Story6");
+                icon = "cinderella.jpg";
+                currentId = 6;
+                type = "jpg";
+                break;
         }
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
@@ -204,7 +210,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
     }
 
     public void nextStory(){
-        if (currentId % 5 != 0){
+        if (currentId % 6 != 0){
             currentId++;
             reference = database.getReference("Story"+currentId);
             reference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -278,8 +284,8 @@ public class MediaPlayerActivity extends AppCompatActivity {
                 }
             });
         } else {
-            reference = database.getReference("Story5");
-            currentId = 5;
+            reference = database.getReference("Story6");
+            currentId = 6;
             reference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
