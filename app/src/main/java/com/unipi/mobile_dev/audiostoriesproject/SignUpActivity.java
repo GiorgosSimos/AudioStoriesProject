@@ -58,12 +58,22 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                     });
         } else {
-            showMessage("Error", "Please provide the information!");
+            if ("de".equals(language)){
+                showMessage("Fehler", "Bitte geben Sie fie Informationen an!");
+            } else if ("it".equals(language)) {
+                showMessage("Errore", "Si prega di fornire le informazioni!");
+            } else {// Default:English
+                showMessage("Error","Please provide the information!");
+            }
         }
     }
 
 
     void showMessage(String title, String message){
-        new AlertDialog.Builder(this).setTitle(title).setMessage(message).setCancelable(true).show();
+        new AlertDialog.Builder(this).
+                setTitle(title).
+                setMessage(message).
+                setCancelable(true).
+                show();
     }
 }

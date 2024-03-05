@@ -53,7 +53,13 @@ public class WelcomeActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
-                                showMessage("Success","User signed in successfully!");
+                                if ("de".equals(language)){
+                                    showMessage("Erfolg", "Benutzer erfolgreich angemeldet!");
+                                } else if ("it".equals(language)) {
+                                    showMessage("Successo", "Utente accesso con successo!");
+                                } else {// Default:English
+                                    showMessage("Success","User signed in successfully!");
+                                }
                                 SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
                                 prefsEditor.putString("UserType", email.getText().toString());
                                 prefsEditor.apply();
@@ -73,7 +79,6 @@ public class WelcomeActivity extends AppCompatActivity {
             } else {// Default:English
                 showMessage("Error","Please provide the information!");
             }
-
         }
     }
 
@@ -92,6 +97,10 @@ public class WelcomeActivity extends AppCompatActivity {
 
 
     void showMessage(String title, String message){
-        new AlertDialog.Builder(this).setTitle(title).setMessage(message).setCancelable(true).show();
+        new AlertDialog.Builder(this).
+                setTitle(title).
+                setMessage(message).
+                setCancelable(true).
+                show();
     }
 }
