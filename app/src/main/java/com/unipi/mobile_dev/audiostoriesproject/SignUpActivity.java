@@ -15,11 +15,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Locale;
+
 public class SignUpActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser user;
     EditText email, password;
     Intent intent;
+    String language = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,8 @@ public class SignUpActivity extends AppCompatActivity {
         password = findViewById(R.id.editTextPassword);
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
+        Locale defaultLocale = Locale.getDefault();
+        language = defaultLocale.getLanguage();
     }
 
     public void signUp(View view) {
@@ -38,7 +43,13 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                showMessage("Success", "User profile created!");
+                                if ("de".equals(language)){
+                                    showMessage("Fehler", "Bitte geben Sie fie Informationen an!");
+                                } else if ("it".equals(language)) {
+                                    showMessage("Errore", "Si prega di fornire le informazioni!");
+                                } else {// Default:English
+                                    showMessage("Success", "User profile created!");
+                                }
                                 user = mAuth.getCurrentUser();
                                 finish();
                             } else {
