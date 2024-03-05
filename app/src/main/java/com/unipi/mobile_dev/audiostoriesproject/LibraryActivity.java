@@ -77,7 +77,6 @@ public class LibraryActivity extends AppCompatActivity {
             login_logout_text.setText("Logout");
         }
         userInfo.setText(userType);
-        //showMessage("Language",lan);
 
         burger_menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,9 +142,9 @@ public class LibraryActivity extends AppCompatActivity {
                     overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
                     finish();
                 } else {
-                    if(lan.equals("de")){
+                    if(lan.equals("de")){// German
                         Toast.makeText(LibraryActivity.this, "Nur für eingeloggte Benutzer verfügbar!", Toast.LENGTH_SHORT).show();
-                    }else if (lan.equals("it")){
+                    }else if (lan.equals("it")){// Italian
                         Toast.makeText(LibraryActivity.this, "Disponibile solo per gli utenti registrati!", Toast.LENGTH_SHORT).show();
                     }else{
                         Toast.makeText(LibraryActivity.this, "Available only for logged in users!", Toast.LENGTH_SHORT).show();

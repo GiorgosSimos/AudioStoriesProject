@@ -71,9 +71,9 @@ public class WelcomeActivity extends AppCompatActivity {
             } else if ("it".equals(language)) {
                 showMessage("Errore", "Si prega di fornire le informazioni!");
             } else {// Default:English
-
+                showMessage("Error","Please provide the information!");
             }
-            showMessage("Error","Please provide the information!");
+
         }
     }
 
