@@ -9,7 +9,7 @@
     <string name="Shoemaker">Schuster</string>
     <string name="the_hare_and_the_tortoise">der Hase und die Schildkröte</string>
     <string name="posh_rat">schicke Ratte</string>
-    <string name="all_statistitcs">alle Statistiken</string>
+    <string name="all_statistics">alle Statistiken</string>
     <string name="most_favorite">am liebsten</string>
     <string name="less_favorite">weniger beliebt</string>
     <string name="cinderella">Aschenputtel</string>
@@ -56,6 +56,6 @@
     <string name="sign_up">Melden Sie sich an</string>
     <string name="unipi_audio_stories_from_toolbar">Unipi-Audiogeschichten</string>
     <string name="media_player">Media Giocatrice</string>
-    <string name="library">Biblioteca</string>
+    <string name="library">Bibliothek</string>
     <string name="statistics">Statistiken</string>
 </resources>

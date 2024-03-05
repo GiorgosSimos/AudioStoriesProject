@@ -26,7 +26,7 @@
         android:layout_width="222dp"
         android:layout_height="54dp"
         android:onClick="showAllShows"
-        android:text="@string/all_statistitcs"
+        android:text="@string/all_statistics"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

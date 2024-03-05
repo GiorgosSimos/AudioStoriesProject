@@ -112,9 +112,22 @@ public class LibraryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (userType.equals("Visitor")) {
-                    Toast.makeText(LibraryActivity.this, "Please sign in or sign up", Toast.LENGTH_SHORT).show();
+                    if(lan.equals("de")){// German
+                        Toast.makeText(LibraryActivity.this, "Bitte melde dich an oder registriere dich", Toast.LENGTH_SHORT).show();
+                    }else if (lan.equals("it")){// Italian
+                        Toast.makeText(LibraryActivity.this, "Effettua l'accesso o registrati, per favore", Toast.LENGTH_SHORT).show();
+                    }else{// Default: English
+                        Toast.makeText(LibraryActivity.this, "Please sign in or sign up", Toast.LENGTH_SHORT).show();
+                    }
+
                 } else {
-                    Toast.makeText(LibraryActivity.this, "Logout Successfull", Toast.LENGTH_SHORT).show();
+                    if(lan.equals("de")){// German
+                        Toast.makeText(LibraryActivity.this, "Abmeldung erfolgreich", Toast.LENGTH_SHORT).show();
+                    }else if (lan.equals("it")){// Italian
+                        Toast.makeText(LibraryActivity.this, "Logout completato con successo", Toast.LENGTH_SHORT).show();
+                    }else{// Default: English
+                        Toast.makeText(LibraryActivity.this, "Logout Successful", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 redirectActivity(LibraryActivity.this, WelcomeActivity.class);
                 SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
@@ -143,11 +156,11 @@ public class LibraryActivity extends AppCompatActivity {
                     finish();
                 } else {
                     if(lan.equals("de")){// German
-                        Toast.makeText(LibraryActivity.this, "Nur für eingeloggte Benutzer verfügbar!", Toast.LENGTH_SHORT).show();
+                        showMessage("Statistiken", "Verfügbar nur für angemeldete Benutzer!");
                     }else if (lan.equals("it")){// Italian
-                        Toast.makeText(LibraryActivity.this, "Disponibile solo per gli utenti registrati!", Toast.LENGTH_SHORT).show();
-                    }else{
-                        Toast.makeText(LibraryActivity.this, "Available only for logged in users!", Toast.LENGTH_SHORT).show();
+                        showMessage("Statistiche", "Disponibile solo per gli utenti loggati!");
+                    }else{// Default: English
+                        showMessage("Statistics", "Available only for logged in users!");
                     }
                 }
                 return true;
@@ -237,10 +250,10 @@ public class LibraryActivity extends AppCompatActivity {
         intent.putExtra("ImageViewName",imageViewName);
         startActivity(intent);
     }
-    private void showMessage(String title, String name) {
+    private void showMessage(String title, String message) {
         new AlertDialog.Builder(this)
                 .setTitle(title)
-                .setMessage("ImageView Name: " + name)
+                .setMessage(message)
                 .setCancelable(true)
                 .show();
     }

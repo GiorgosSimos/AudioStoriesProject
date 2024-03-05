@@ -8,7 +8,7 @@
     <string name="Shoemaker">ShoeMaker</string>
     <string name="the_hare_and_the_tortoise">The hare and the Tortoise</string>
     <string name="posh_rat">Posh Rat</string>
-    <string name="all_statistitcs">All statistitcs</string>
+    <string name="all_statistics">All statistics</string>
     <string name="most_favorite">Most favorite</string>
     <string name="less_favorite">Least favorite</string>
     <string name="cinderella">Cinderella</string>
@@ -31,7 +31,7 @@
     <string name="previous">Previous</string>
     <string name="release_year">Release Year</string>
     <string name="author">Author</string>
-    <string name="audio_story_title">Ttile</string>
+    <string name="audio_story_title">Title</string>
     <string name="sign_in">Sign in</string>
     <string name="speak_command">Speak</string>
     <string name="new_user_click_here_new2">New User--Click Here</string>

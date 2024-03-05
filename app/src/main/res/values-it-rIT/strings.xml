@@ -9,7 +9,7 @@
     <string name="Shoemaker">Calzolaia</string>
     <string name="the_hare_and_the_tortoise">La lepre e la tartaruga</string>
     <string name="posh_rat">Ratto elegante</string>
-    <string name="all_statistitcs">Tutte le statistiche</string>
+    <string name="all_statistics">Tutte le statistiche</string>
     <string name="most_favorite">Il più preferito</string>
     <string name="less_favorite">Meno favorito</string>
     <string name="cinderella">Cenerentola</string>
@@ -56,6 +56,6 @@
     <string name="sign_up">Iscrizione</string>
     <string name="unipi_audio_stories_from_toolbar">Racconti audio Unipi</string>
     <string name="media_player">Medien Spieler</string>
-    <string name="library">Bibliothek</string>
+    <string name="library">Biblioteca</string>
     <string name="statistics">Statistiche</string>
 </resources>

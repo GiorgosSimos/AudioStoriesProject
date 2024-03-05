@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -35,6 +34,9 @@ import java.util.Objects;
 
 public class MediaPlayerActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
+
+    Locale defaultLocale = Locale.getDefault();
+    String lan = defaultLocale.getLanguage();
 
     BottomNavigationView bottomNavigationView;
     ImageView storyImage;
@@ -87,7 +89,13 @@ public class MediaPlayerActivity extends AppCompatActivity {
                     overridePendingTransition(R.anim.slide_right, R.anim.slide_left);
                     finish();
                 } else {
-                    Toast.makeText(MediaPlayerActivity.this, "Available only for logged in users!", Toast.LENGTH_SHORT).show();
+                    if(lan.equals("de")){// German
+                        showMessage("Statistiken", "Verfügbar nur für angemeldete Benutzer!");
+                    }else if (lan.equals("it")){// Italian
+                        showMessage("Statistiche", "Disponibile solo per gli utenti loggati!");
+                    }else{// Default: English
+                        showMessage("Statistics", "Available only for logged in users!");
+                    }
                 }
                 return true;
 
