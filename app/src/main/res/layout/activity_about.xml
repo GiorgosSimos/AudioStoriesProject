@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient"
+    tools:context=".AboutActivity">
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="goToLibrary"
+        android:text="@string/return_to_library"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.818" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="393dp"
+        android:layout_height="58dp"
+        android:text="@string/copyright_2024_stergios_toulioudas_amp_georgios_simos"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.973" />
+
+    <EditText
+        android:id="@+id/editTextTextMultiLine"
+        android:layout_width="378dp"
+        android:layout_height="336dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:text="@string/the_android_app_quot_unipi_audio_stories_quot_was_developed_as_part_of_a_university_project_for_the_course_of_software_enigineering_for_mobile_devices_it_offers_a_collection_of_engaging_audio_stories_tailored_for_children_the_app_is_designed_to_provide_children_with_a_delightful_and_educational_experience_through_audio_storytelling_it_offers_a_curated_selection_of_age_appropriate_stories_ranging_from_classic_fairy_tales_to_modern_adventures_upon_launching_the_app_children_are_greeted_with_a_colorful_and_intuitive_interface_designed_to_capture_their_attention_and_spark_their_imagination_the_home_screen_presents_a_variety_of_available_stories_allowing_young_listeners_to_explore_tales_based_on_their_interests_once_a_picture_of_a_story_is_selected_the_app_is_redirected_to_the_media_player_and_children_are_immersed_in_a_captivating_audio_narrative_accompanied_by_details_of_the_story_the_app_s_user_friendly_controls_enable_children_to_play_pause_and_navigate_between_previous_and_next_story_in_addition_to_its_diverse_library_of_stories_quot_unipi_audio_stories_quot_offers_a_statistics_panel_where_children_can_view_how_many_times_they_ve_heard_each_story_and_which_one_is_their_most_least_favorite"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.395" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="385dp"
+        android:layout_height="99dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.028"
+        app:srcCompat="@drawable/logo_app_thin" />
+</androidx.constraintlayout.widget.ConstraintLayout>

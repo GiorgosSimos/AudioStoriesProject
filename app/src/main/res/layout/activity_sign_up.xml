@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient"
     tools:context=".SignUpActivity">
 
     <EditText
@@ -12,7 +13,7 @@
         android:layout_height="64dp"
         android:background="#C5BBBB"
         android:ems="10"
-        android:hint="Please enter your password."
+        android:hint="@string/please_enter_your_password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,7 +28,7 @@
         android:layout_height="64dp"
         android:background="#C5BBBB"
         android:ems="10"
-        android:hint="Please enter your email"
+        android:hint="@string/please_enter_your_email"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,10 +51,10 @@
         app:srcCompat="@drawable/logo_app_thin" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textViewMidas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to Unipi Audio Stories!"
+        android:text="@string/welcome_to_unipi_audio_stories"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +66,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Please sign up to begin!"
+        android:text="@string/please_sign_up_to_begin"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,14 +77,28 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign Up"
+        android:layout_width="107dp"
+        android:layout_height="57dp"
+        android:onClick="signUp"
+        android:text="@string/sign_up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.471"
+        app:layout_constraintHorizontal_bias="0.449"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.783" />
+        app:layout_constraintVertical_bias="0.774" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="107dp"
+        android:layout_height="57dp"
+        android:onClick="goSignIn"
+        android:text="@string/back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.911" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

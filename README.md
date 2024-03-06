@@ -1,2 +1,1 @@
-# AudioStoriesProject
-An android app / university project, contaning audio stories for children
+An android app with Java, consisting of audio stories for kids!

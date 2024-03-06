@@ -1,91 +1,229 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/drawerLayout"
     tools:context=".LibraryActivity">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="124dp"
-        android:layout_height="128dp"
-        android:clickable="true"
-        android:onClick="playStory"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.024"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.152"
-        app:srcCompat="@drawable/snow_white" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".LibraryActivity">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Snow White and the Seven Dwarfs"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.905"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.204" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_gradient"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Jack and the Beanstalk"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.792"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.427" />
+            <include layout="@layout/toolbar" />
+        </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="124dp"
-        android:layout_height="128dp"
-        android:clickable="true"
-        android:onClick="playStory"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.024"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.41"
-        app:srcCompat="@drawable/jack_beanstalk" />
+        <ImageView
+            android:id="@+id/imageViewSnowWhite"
+            android:layout_width="67dp"
+            android:layout_height="64dp"
+            android:clickable="true"
+            android:onClick="navigateMediaPlayer"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.024"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.15"
+            app:srcCompat="@drawable/snow_white_rose_red" />
 
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="54dp"
-        android:layout_height="52dp"
-        android:clickable="true"
-        android:onClick="viewStatistics"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.957"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.014"
-        app:srcCompat="@drawable/statistics" />
+        <TextView
+            android:id="@+id/textViewSnowWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/snow_white_and_the_seven_dwarfs"
+            android:textColor="#673AB7"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:typeface="monospace"
+            app:layout_constraintTop_toTopOf="@id/imageViewSnowWhite"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewSnowWhite"
+            app:layout_constraintStart_toEndOf="@id/imageViewSnowWhite"
+            android:layout_marginStart="15dp" />
 
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="54dp"
-        android:layout_height="52dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.019"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.016"
-        app:srcCompat="@drawable/menu" />
+        <TextView
+            android:id="@+id/textViewMidas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/king_midas"
+            android:textColor="#673AB7"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:typeface="monospace"
+            app:layout_constraintTop_toTopOf="@id/imageViewMidas"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewMidas"
+            app:layout_constraintStart_toEndOf="@id/imageViewMidas"
+            android:layout_marginStart="15dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/imageViewMidas"
+            android:layout_width="67dp"
+            android:layout_height="64dp"
+            android:onClick="navigateMediaPlayer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.024"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.264"
+            app:srcCompat="@drawable/kingmidas" />
+
+        <ImageView
+            android:id="@+id/imageViewShoemaker"
+            android:layout_width="67dp"
+            android:layout_height="64dp"
+            android:onClick="navigateMediaPlayer"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.024"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.372"
+            app:srcCompat="@drawable/elves_shoemaker" />
+
+        <ImageView
+            android:id="@+id/imageViewTortoise"
+            android:layout_width="67dp"
+            android:layout_height="64dp"
+            android:onClick="navigateMediaPlayer"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.024"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.485"
+            app:srcCompat="@drawable/tortoise_and_rabbit" />
+
+        <ImageView
+            android:id="@+id/imageViewRat"
+            android:layout_width="67dp"
+            android:layout_height="64dp"
+            android:onClick="navigateMediaPlayer"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.024"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.6"
+            app:srcCompat="@drawable/poshrat" />
+
+        <TextView
+            android:id="@+id/textViewShoemaker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/Shoemaker"
+            android:onClick="navigateMediaPlayer"
+            android:textColor="#009688"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:typeface="monospace"
+            app:layout_constraintStart_toEndOf="@id/imageViewShoemaker"
+            app:layout_constraintTop_toTopOf="@id/imageViewShoemaker"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewShoemaker"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.40"
+            android:layout_marginStart="15dp" />
+
+        <TextView
+            android:id="@+id/textViewTortoise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/the_hare_and_the_tortoise"
+            android:textColor="#2196F3"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:typeface="monospace"
+            app:layout_constraintTop_toTopOf="@id/imageViewTortoise"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewTortoise"
+            app:layout_constraintStart_toEndOf="@id/imageViewTortoise"
+            android:layout_marginStart="15dp" />
+
+        <TextView
+            android:id="@+id/textViewRat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/posh_rat"
+            android:textColor="#FF5722"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:typeface="monospace"
+            app:layout_constraintTop_toTopOf="@id/imageViewRat"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewRat"
+            app:layout_constraintStart_toEndOf="@id/imageViewRat"
+            android:layout_marginStart="15dp"
+            />
+
+        <ImageView
+            android:id="@+id/imageViewCinderella"
+            android:layout_width="67dp"
+            android:layout_height="64dp"
+            android:clickable="true"
+            android:onClick="navigateMediaPlayer"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.024"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.72"
+            app:srcCompat="@drawable/cinderella" />
+
+        <TextView
+            android:id="@+id/textViewCinderella"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/cinderella"
+            android:textColor="#673AB7"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:typeface="monospace"
+            app:layout_constraintTop_toTopOf="@+id/imageViewCinderella"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewCinderella"
+            app:layout_constraintStart_toEndOf="@+id/imageViewCinderella"
+            android:layout_marginStart="15dp" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_background"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:elevation="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:itemRippleColor="@android:color/transparent"
+            app:itemIconSize="32dp"
+            app:itemIconTint="@drawable/item_selector"
+            app:menu="@menu/bottom_nav_menu">
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_gravity = "start">
+
+        <include
+            layout="@layout/nav_drawer"/>
+    </RelativeLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

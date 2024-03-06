@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/library"
+        android:icon="@drawable/library_50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="@string/library" />
+    <item
+        android:id="@+id/music_player"
+        android:icon="@drawable/music_96"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="@string/media_player" />
+    <item
+        android:id="@+id/statistics"
+        android:icon="@drawable/statistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="@string/statistics" />
+</menu>
