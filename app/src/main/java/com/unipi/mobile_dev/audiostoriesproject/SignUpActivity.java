@@ -76,4 +76,9 @@ public class SignUpActivity extends AppCompatActivity {
                 setCancelable(true).
                 show();
     }
+
+    public void goSignIn(View view) {
+        Intent intent = new Intent(SignUpActivity.this, WelcomeActivity.class);
+        startActivity(intent);
+    }
 }
