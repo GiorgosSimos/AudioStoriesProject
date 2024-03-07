@@ -15,8 +15,8 @@
     <string name="cinderella2">Cinderella</string>
     <string name="sign_in_new">Sign in</string>
     <string name="visitor_new">Visitor</string>
-    <string name="password_new">Password</string>
-    <string name="email_new">Email</string>
+    <string name="password_new">"  Password"</string>
+    <string name="email_new">"  Email"</string>
     <string name="audio_story_title_new">Title</string>
     <string name="author_new">Author</string>
     <string name="release_year_new">Release Year</string>
@@ -48,8 +48,8 @@
     <string name="return_to_library_from_contct">Return To Library</string>
     <string name="please_feel_free_to_contact_us_at_s_toulioudas_unipi_gr_g_simos_unipi_gr">Please feel free to contact us at: s_toulioudas@unipi.gr, g_simos@unipi.gr</string>
     <string name="app_version_1_0">App Version 1.0</string>
-    <string name="please_enter_your_password">Please enter your password.</string>
-    <string name="please_enter_your_email">Please enter your email</string>
+    <string name="please_enter_your_password">"  Please enter your password."</string>
+    <string name="please_enter_your_email">"  Please enter your email"</string>
     <string name="welcome_to_unipi_audio_stories">Welcome to Unipi Audio Stories!</string>
     <string name="please_sign_up_to_begin">Please sign up to begin!</string>
     <string name="sign_up">Sign Up</string>

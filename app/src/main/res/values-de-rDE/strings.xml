@@ -16,8 +16,8 @@
     <string name="cinderella2">Aschenputtel</string>
     <string name="sign_in_new">Eintragen</string>
     <string name="visitor_new">Gast</string>
-    <string name="password_new">Geben Sie Ihr Passwort ein</string>
-    <string name="email_new">Geben sie ihre E-Mail Adresse ein</string>
+    <string name="password_new">"  Geben Sie Ihr Passwort ein"</string>
+    <string name="email_new">"  Geben sie ihre E-Mail Adresse ein"</string>
     <string name="sign_in">Eintragen</string>
     <string name="audio_story_title">Titel der Audio-Story</string>
     <string name="author">Autor</string>
@@ -49,8 +49,8 @@
     <string name="return_to_library_from_contct">Zurück zur Bibliothek</string>
     <string name="please_feel_free_to_contact_us_at_s_toulioudas_unipi_gr_g_simos_unipi_gr">Bitte kontaktieren Sie uns unter: s_toulioudas@unipi.gr, g_simos@unipi.gr</string>
     <string name="app_version_1_0">Anwendung Ausführung 1.0</string>
-    <string name="please_enter_your_password">Bitte geben Sie Ihr Passwort ein.</string>
-    <string name="please_enter_your_email">Bitte geben Sie ihre E-Mail-Adresse ein</string>
+    <string name="please_enter_your_password">"  Bitte geben Sie Ihr Passwort ein."</string>
+    <string name="please_enter_your_email">"  Bitte geben Sie ihre E-Mail-Adresse ein"</string>
     <string name="welcome_to_unipi_audio_stories">Willkommen bei Unipi Audio Stories!</string>
     <string name="please_sign_up_to_begin">Bitte melden Sie sich an, um zu beginnen!</string>
     <string name="sign_up">Melden Sie sich an</string>
