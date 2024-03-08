@@ -76,7 +76,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 if ("de".equals(language)){
                     showMessage("Fehler", "Die E-Mail und das Passwort dürfen nicht leer sein!");
                 } else if ("it".equals(language)) {
-                    showMessage("Errore", "Email e password non possono essere vuoti.!");
+                    showMessage("Errore", "Email e password non possono essere vuoti!");
                 } else {// Default:English
                     showMessage("Error","Email and password cannot be empty!");
                 }
