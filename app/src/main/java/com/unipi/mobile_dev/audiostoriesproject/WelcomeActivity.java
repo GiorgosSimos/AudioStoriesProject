@@ -47,8 +47,11 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     public void goSignIn(View view) {
-        if (!email.getText().toString().isEmpty() && !password.getText().toString().isEmpty()){
-            mAuth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString())
+        String userEmail = email.getText().toString();
+        String userPassword = password.getText().toString();
+
+        if (!userEmail.isEmpty() && !userPassword.isEmpty()){
+            mAuth.signInWithEmailAndPassword(userEmail, userPassword)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -60,11 +63,8 @@ public class WelcomeActivity extends AppCompatActivity {
                                 } else {// Default:English
                                     showMessage("Success","User signed in successfully!");
                                 }
-                                SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
-                                prefsEditor.putString("UserType", email.getText().toString());
-                                prefsEditor.apply();
-                                Intent intent = new Intent(WelcomeActivity.this, LibraryActivity.class);
-                                startActivity(intent);
+                                saveUserType(userEmail);
+                                navigateToLibraryActivity();
                             }else {
                                 showMessage("Error",task.getException().getLocalizedMessage());
                             }
@@ -72,13 +72,32 @@ public class WelcomeActivity extends AppCompatActivity {
                     });
 
         }else {
-            if ("de".equals(language)){
-                showMessage("Fehler", "Bitte geben Sie fie Informationen an!");
-            } else if ("it".equals(language)) {
-                showMessage("Errore", "Si prega di fornire le informazioni!");
-            } else {// Default:English
-                showMessage("Error","Please provide the information!");
+            if (userEmail.isEmpty() && userPassword.isEmpty()){
+                if ("de".equals(language)){
+                    showMessage("Fehler", "Die E-Mail und das Passwort dürfen nicht leer sein!");
+                } else if ("it".equals(language)) {
+                    showMessage("Errore", "Email e password non possono essere vuoti.!");
+                } else {// Default:English
+                    showMessage("Error","Email and password cannot be empty!");
+                }
+            } else if (userEmail.isEmpty()) {
+                if ("de".equals(language)){
+                    showMessage("Fehler", "Die E-Mail darf nicht leer sein!");
+                } else if ("it".equals(language)) {
+                    showMessage("Errore", "Email non può essere vuota!");
+                } else {// Default:English
+                    showMessage("Error","Email cannot be empty!");
+                }
+            } else {
+                if ("de".equals(language)){
+                    showMessage("Fehler", "Das Passwort darf nicht leer sein!");
+                } else if ("it".equals(language)) {
+                    showMessage("Errore", "La password non può essere vuota!");
+                } else {// Default:English
+                    showMessage("Error","Password cannot be empty!");
+                }
             }
+
         }
     }
 
@@ -88,11 +107,8 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     public void visitor(View view) {
-        SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
-        prefsEditor.putString("UserType", "Visitor");
-        prefsEditor.apply();
-        Intent intent = new Intent(this, LibraryActivity.class);
-        startActivity(intent);
+        saveUserType("Visitor");
+        navigateToLibraryActivity();
     }
 
 
@@ -102,5 +118,17 @@ public class WelcomeActivity extends AppCompatActivity {
                 setMessage(message).
                 setCancelable(true).
                 show();
+    }
+
+
+    private void saveUserType(String userEmail) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("UserType", userEmail);
+        editor.apply();
+    }
+
+    private void navigateToLibraryActivity() {
+        Intent intent = new Intent(WelcomeActivity.this, LibraryActivity.class);
+        startActivity(intent);
     }
 }
