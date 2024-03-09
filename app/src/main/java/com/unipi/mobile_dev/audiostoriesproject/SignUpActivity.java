@@ -21,7 +21,6 @@ public class SignUpActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser user;
     EditText email, password;
-    Intent intent;
     String language = "";
 
     @Override
@@ -37,19 +36,18 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void signUp(View view) {
-        if (!email.getText().toString().isEmpty() && !password.getText().toString().isEmpty()) {
-            mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+        String userEmail = email.getText().toString();
+        String userPassword = password.getText().toString();
+        boolean emailEmpty = userEmail.isEmpty();
+        boolean passwordEmpty = userPassword.isEmpty();
+
+        if (!emailEmpty && !passwordEmpty) { // Credentials are both set
+            mAuth.createUserWithEmailAndPassword(userEmail, userPassword)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                if ("de".equals(language)){
-                                    showMessage("Fehler", "Bitte geben Sie fie Informationen an!");
-                                } else if ("it".equals(language)) {
-                                    showMessage("Errore", "Si prega di fornire le informazioni!");
-                                } else {// Default:English
-                                    showMessage("Success", "User profile created!");
-                                }
+                                showMessage(getString(R.string.success_title), getString(R.string.success_signup_description));
                                 user = mAuth.getCurrentUser();
                                 finish();
                             } else {
@@ -58,14 +56,20 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                     });
         } else {
-            if ("de".equals(language)){
-                showMessage("Fehler", "Bitte geben Sie fie Informationen an!");
-            } else if ("it".equals(language)) {
-                showMessage("Errore", "Si prega di fornire le informazioni!");
-            } else {// Default:English
-                showMessage("Error","Please provide the information!");
-            }
+            showErrorMessages(emailEmpty, passwordEmpty);
         }
+    }
+
+    private void showErrorMessages(boolean emailEmpty, boolean passwordEmpty) {
+        String errorMessage;
+        if (emailEmpty && passwordEmpty) {
+            errorMessage = getString(R.string.error_email_password_empty);
+        } else if (emailEmpty) {
+            errorMessage = getString(R.string.error_email_empty);
+        } else {
+            errorMessage = getString(R.string.error_password_empty);
+        }
+        showMessage(getString(R.string.error_title), errorMessage);
     }
 
 

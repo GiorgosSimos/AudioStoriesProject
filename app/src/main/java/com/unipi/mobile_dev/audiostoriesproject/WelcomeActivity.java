@@ -49,55 +49,25 @@ public class WelcomeActivity extends AppCompatActivity {
     public void goSignIn(View view) {
         String userEmail = email.getText().toString();
         String userPassword = password.getText().toString();
+        boolean emailEmpty = userEmail.isEmpty();
+        boolean passwordEmpty = userPassword.isEmpty();
 
-        if (!userEmail.isEmpty() && !userPassword.isEmpty()){
+        if (!emailEmpty && !passwordEmpty){// Credentials are both set
             mAuth.signInWithEmailAndPassword(userEmail, userPassword)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()){
-                                if ("de".equals(language)){
-                                    showMessage("Erfolg", "Benutzer erfolgreich angemeldet!");
-                                } else if ("it".equals(language)) {
-                                    showMessage("Successo", "Utente accesso con successo!");
-                                } else {// Default:English
-                                    showMessage("Success","User signed in successfully!");
-                                }
+                            if (task.isSuccessful()){// Log In Successful
+                                showMessage(getString(R.string.success_title), getString(R.string.success_signin_description));
                                 saveUserType(userEmail);
                                 navigateToLibraryActivity();
                             }else {
-                                showMessage("Error",task.getException().getLocalizedMessage());
+                                showMessage(getString(R.string.error_title), task.getException().getLocalizedMessage());
                             }
                         }
                     });
-
         }else {
-            if (userEmail.isEmpty() && userPassword.isEmpty()){
-                if ("de".equals(language)){
-                    showMessage("Fehler", "Die E-Mail und das Passwort dürfen nicht leer sein!");
-                } else if ("it".equals(language)) {
-                    showMessage("Errore", "Email e password non possono essere vuoti!");
-                } else {// Default:English
-                    showMessage("Error","Email and password cannot be empty!");
-                }
-            } else if (userEmail.isEmpty()) {
-                if ("de".equals(language)){
-                    showMessage("Fehler", "Die E-Mail darf nicht leer sein!");
-                } else if ("it".equals(language)) {
-                    showMessage("Errore", "Email non può essere vuota!");
-                } else {// Default:English
-                    showMessage("Error","Email cannot be empty!");
-                }
-            } else {
-                if ("de".equals(language)){
-                    showMessage("Fehler", "Das Passwort darf nicht leer sein!");
-                } else if ("it".equals(language)) {
-                    showMessage("Errore", "La password non può essere vuota!");
-                } else {// Default:English
-                    showMessage("Error","Password cannot be empty!");
-                }
-            }
-
+            showErrorMessages(emailEmpty, passwordEmpty);
         }
     }
 
@@ -111,7 +81,6 @@ public class WelcomeActivity extends AppCompatActivity {
         navigateToLibraryActivity();
     }
 
-
     void showMessage(String title, String message){
         new AlertDialog.Builder(this).
                 setTitle(title).
@@ -120,6 +89,17 @@ public class WelcomeActivity extends AppCompatActivity {
                 show();
     }
 
+    private void showErrorMessages(boolean emailEmpty, boolean passwordEmpty) {
+        String errorMessage;
+        if (emailEmpty && passwordEmpty) {
+            errorMessage = getString(R.string.error_email_password_empty);
+        } else if (emailEmpty) {
+            errorMessage = getString(R.string.error_email_empty);
+        } else {
+            errorMessage = getString(R.string.error_password_empty);
+        }
+        showMessage(getString(R.string.error_title), errorMessage);
+    }
 
     private void saveUserType(String userEmail) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
