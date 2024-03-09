@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/snow_white_and_the_seven_dwarfs"
             android:textColor="#673AB7"
-            android:textSize="16sp"
+            android:textSize="16.5sp"
             android:textStyle="bold"
             android:typeface="monospace"
             app:layout_constraintTop_toTopOf="@id/imageViewSnowWhite"
